@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/product')]
+#[Route('/admin/product')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'product_index', methods: ['GET'])]

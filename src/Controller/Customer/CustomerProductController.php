@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Customer;
 
 use App\Repository\ProductRepository;
-use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-use function PHPUnit\Framework\isEmpty;
 
 class CustomerProductController extends AbstractController
 {
@@ -21,19 +18,6 @@ class CustomerProductController extends AbstractController
             return $this->redirectToRoute("home");
         return $this->render('customer_product/product.html.twig', [
             'product' => $product,
-        ]);
-    }
-
-    #[Route('/customer/category/{id}', name: 'customer_category')]
-    public function showCategory($id, CategoryRepository $categoryRepository): Response
-    {
-        $category = $categoryRepository->find($id);
-
-        if (!$category)
-            return $this->redirectToRoute("home");
-
-        return $this->render('customer_product/category.html.twig', [ 
-                'category' => $category
         ]);
     }
 }

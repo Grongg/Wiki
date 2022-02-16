@@ -16,7 +16,7 @@
             <div class="col-12 mb-3">
                 <a href="{{ path('home') }}" class="btn btn-secondary">Retour à la page d'accueil</a>
             </div>
-           {% if category.products | length > 0 %}
+            {% if category.products | length > 0 %}
                 {% for product in category.products %}
                     <div class="col-4 mt-2">
                         <div class="card">
