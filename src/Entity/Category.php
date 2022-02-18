@@ -21,7 +21,6 @@ class Category
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message: 'Le champs image est requis.')]
     private $image;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class, orphanRemoval: true)]

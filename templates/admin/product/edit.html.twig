@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row">
+        
+            <div class="col-12 mb-3">
+                <a href="{{ path('admin_product_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+            
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Formulaire de modification des produits</h3>
+                    </div>
+                    <div class="card-body">
+                        {{ include('admin/product/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                {{ include('admin/product/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

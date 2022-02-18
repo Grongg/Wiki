@@ -49,8 +49,12 @@ class ChunAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        $user = $token->getUser();
+
+        if ($user->getRoles()[0] === "ROLE_ADMIN")
+            return new RedirectResponse($this->urlGenerator->generate('admin_home'));
+        else
+            return new RedirectResponse($this->urlGenerator->generate('customer_home'));
     }
 
     protected function getLoginUrl(Request $request): string

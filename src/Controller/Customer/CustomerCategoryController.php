@@ -17,7 +17,7 @@ class CustomerCategoryController extends AbstractController
         if (!$category)
             return $this->redirectToRoute("home");
 
-        return $this->render('customer_category/category.html.twig', [ 
+        return $this->render('customer/customer_category/category.html.twig', [ 
                 'category' => $category
         ]);
     }

@@ -7,7 +7,10 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
@@ -23,11 +26,15 @@ class ProductType extends AbstractType
                     'placeholder' => 'Taper le nom ici...'
                 ]
             ])
-            ->add('image',TextType::class,[
+            ->add('file',FileType::class,[
+                'mapped' => false,
                 'required' => false,
-                'label' => 'Image du produit',
-                'attr' => [
-                    'placeholder' => 'Chemin de l\'image...'
+                'label' => 'Upload une Image',
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1m',
+                        'maxSizeMessage' => 'Le poids ne peut pas depasser 1mo, le fichier est trop lourd'
+                    ])
                 ]
             ])
             ->add('price',MoneyType::class,[
