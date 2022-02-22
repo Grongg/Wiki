@@ -1,0 +1,79 @@
+{% extends "customer/base.html.twig" %}
+
+{% block body %}
+
+    {% include "/customer/shared/_messages_flash.html.twig" %}    
+    <div class="container py-5">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <h3 class="text-center">
+                    Mon panier
+                </h3>
+            </div>
+            
+
+            <div class="col-sm-12 col-md-10 col-lg-8 mt-3">
+
+                <div class="card">
+                    <div class="card-body">
+                        {% if cart | length > 0 %}
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Produit</th>
+                                            <th scope="col">P.U</th>
+                                            <th scope="col" >Qté</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                                        {% for item in cart %}
+                        
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart">
+                                                        <div class="d-flex flex-column align-items-center justify-content-center">
+                                                            <p>{{ item.product.name }}</p>
+                                                            <a class="btn btn-link text-danger btn-sm" href="{{ path('cart_remove',{'id' : item.product.id }) }}"><i class="fas fa-trash"></i> Supprimer</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ item.product.price | priceFormatEuro }}</td>
+                                                <td>
+                                                    <a class="btn btn-dark" href="{{ path('cart_decrement',{'id': item.product.id}) }}"><i class="fas fa-minus-circle"></i></a>
+                                                    <button class="btn btn-light">{{ item.qty }}</button>
+                                                    <a class="btn btn-dark" href="{{ path('cart_add',{'id': item.product.id}) }}?returnToCart=true"><i class="fas fa-plus-circle"></i></a>
+                                                </td>
+                                                <td>{{ item.total | priceFormatEuro }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th><strong>Sous Total</strong></th>
+                                            <th><strong>{{ totalCart | priceFormatEuro }}</strong></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <a href="#" class="btn btn-primary"> Valider mon panier</a>
+                            </div>
+
+                        {% else %}
+                            <p>Le panier est vide.</p>
+                            <br/>
+                            <a class="btn btn-link" href="{{ path('customer_home') }}">Continuer le shopping</a>
+                        {% endif  %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
