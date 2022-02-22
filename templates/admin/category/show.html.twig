@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ path('admin_home') }}" class="btn btn-secondary">Retour à la page d'accueil</a>
+                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
                     </div>
                     <h3 class="col text-center">
                         {{ category.name | upper }}
@@ -47,6 +47,7 @@
                 <p>Il n'y a pas encore de produit ayant cette catégorie</p>
                 <p>Voulez-vous en ajouter ?</p>
                 <div class="col-12">
+                    <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
                     <a href="{{ path('admin_product_index') }}" class="btn btn-primary w-100">Aller au gestionnaire de produit</a>
                 </div>
             {% endif %}

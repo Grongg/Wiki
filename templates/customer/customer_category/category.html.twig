@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-12 mb-3">
-                <a href="{{ path('customer_home') }}" class="btn btn-secondary">Retour à la page d'accueil</a>
+                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
             </div>
             {% if category.products | length > 0 %}
                 {% for product in category.products %}
