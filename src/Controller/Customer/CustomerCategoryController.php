@@ -15,7 +15,7 @@ class CustomerCategoryController extends AbstractController
         $category = $categoryRepository->find($id);
 
         if (!$category)
-            return $this->redirectToRoute("home");
+            return $this->redirectToRoute("customer_home");
 
         return $this->render('customer/customer_category/category.html.twig', [ 
                 'category' => $category

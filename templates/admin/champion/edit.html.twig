@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit{% endblock %}
+
+{% block body %}
+    <h1>Edit Champion</h1>
+
+    {{ include('admin/champion/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_champion_index') }}">back to list</a>
+
+    {{ include('admin/champion/_delete_form.html.twig') }}
+{% endblock %}

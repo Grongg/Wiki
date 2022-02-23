@@ -15,7 +15,7 @@ class CustomerProductController extends AbstractController
         $product = $productRepository->find($id);
 
         if (!$product)
-            return $this->redirectToRoute("home");
+            return $this->redirectToRoute("customer_home");
         return $this->render('customer/customer_product/product.html.twig', [
             'product' => $product,
         ]);

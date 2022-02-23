@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}champion index{% endblock %}
 
 {% block body %}
-{% include "/customer/shared/_messages_flash.html.twig" %}
+    {% include "/customer/shared/_messages_flash.html.twig" %}
    <div class="container py-5">
         <div class="row">
             <div class="col-12 mb-3">
@@ -13,32 +13,32 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h3>Gestion des catégories</h3>
-                            <a href="{{ path('admin_category_new') }}" class="btn btn-primary">Ajouter</a>
+                            <h3>Gestion des champions</h3>
+                            <a href="{{ path('admin_champion_new') }}" class="btn btn-primary">Ajouter</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="navigation">
-                                {{ knp_pagination_render(categories) }}
+                                {{ knp_pagination_render(champions) }}
                             </div>
-                            {% for category in categories %}
+                            {% for champion in champions %}
                                 <div class="col-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>{{ category.name }}</h5>
+                                            <h5>{{ champion.name }}</h5>
                                         </div>
                                         <div class="card-body">
-                                            <img src="{{ category.image }}" alt="" class="w-100 imageCard">
+                                            <img src="{{ champion.mainImage }}" alt="" class="w-100 imageCard">
                                         </div>
                                         <div class="card-footer">
-                                            <a href="{{ path('admin_category_edit',{ 'id' : category.id } ) }}" class="btn btn-info w-100">Modifier</a>
+                                            <a href="{{ path('admin_champion_edit',{ 'id' : champion.id } ) }}" class="btn btn-info w-100">Modifier</a>
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
                             <div class="navigation mt-4">
-                                {{ knp_pagination_render(categories) }}
+                                {{ knp_pagination_render(champions) }}
                             </div>                            
                         </div>
                     </div>
@@ -47,4 +47,3 @@
         </div>
    </div>
 {% endblock %}
-
