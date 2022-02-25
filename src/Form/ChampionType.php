@@ -15,6 +15,10 @@ class ChampionType extends AbstractType
             ->add('name')
             ->add('mainImage')
             ->add('price')
+            ->add('title')
+            ->add('blurb')
+            ->add('tags')
+            ->add('icon')
         ;
     }
 

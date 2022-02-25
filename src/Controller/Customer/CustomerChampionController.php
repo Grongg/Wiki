@@ -25,7 +25,7 @@ class CustomerChampionController extends AbstractController
         $champion = $championRepository->find($id);
 
         return $this->render('customer/champion/championProfile.html.twig', [
-            'champion' => $champion
+            'champion' => $champion,
         ]);
     }
 }

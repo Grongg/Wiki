@@ -25,6 +25,21 @@ class Champion
     #[Assert\NotBlank(message: 'Le champs prix est requis.')]    
     private $price;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le champs titre est requis.')]
+    private $title;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le champs resume est requis.')]
+    private $blurb;
+
+    #[ORM\Column(type: 'array')]
+    #[Assert\NotBlank(message: 'Le champs tags est requis.')]
+    private $tags = [];
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $icon;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +77,54 @@ class Champion
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getBlurb(): ?string
+    {
+        return $this->blurb;
+    }
+
+    public function setBlurb(string $blurb): self
+    {
+        $this->blurb = $blurb;
+
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(array $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): self
+    {
+        $this->icon = $icon;
 
         return $this;
     }

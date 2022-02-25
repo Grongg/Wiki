@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Champion;
 use App\Form\ChampionType;
 use App\Repository\ChampionRepository;
+use App\Services\ChampionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,11 @@ class AdminChampionController extends AbstractController
 {
     #[Route('/', name: 'admin_champion_index', methods: ['GET'])]
     public function index(ChampionRepository $championRepository,
+                        ChampionService $championService,
                         PaginatorInterface $paginator,
+                        EntityManagerInterface $entityManager,
                         Request $request): Response
     {
-
         $champions = $paginator->paginate(
             $championRepository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -67,6 +69,7 @@ class AdminChampionController extends AbstractController
         $form = $this->createForm(ChampionType::class, $champion);
         $form->handleRequest($request);
 
+        // dd(DataDragonAPI::getStaticChampions());
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
