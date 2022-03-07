@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -53,21 +54,56 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'label' => 'Mot de passe',
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe doivent etre identique',
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'autocomplete' => 'new-password',
-                    'placeholder' => 'azerty'
+                    'autocomplete' => 'new-password'
                 ],
+                'first_options' => [
+                    'label' => 'Mot de passe',
+                    'attr' => [
+                        'placeholder' => 'azerty'
+                    ],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Le mot de passe est requis'
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Your password should be at least {{ limit }} caractères',
+                            'max' => 4096
+                        ])
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Confirmer votre mot de passe',
+                    'attr' => [
+                        'placeholder' => 'confirmer mot de passe'
+                    ],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Le mot de passe est requis'
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Your password should be at least {{ limit }} caractères',
+                            'max' => 4096
+                        ])
+                    ]
+                ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'label' => 'Accepter les CGUV',
+                'required' => false,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password'
+                    new IsTrue([
+                        'message' => 'Vous devez accepter les CGUV.'
                     ])
-                ],
+                ]
             ])
         ;
     }

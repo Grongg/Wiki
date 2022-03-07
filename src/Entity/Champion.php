@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChampionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -39,6 +41,14 @@ class Champion
 
     #[ORM\Column(type: 'string', length: 255)]
     private $icon;
+
+    #[ORM\OneToMany(mappedBy: 'champion', targetEntity: Spell::class, orphanRemoval: true)]
+    private $spells;
+
+    public function __construct()
+    {
+        $this->spells = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +135,36 @@ class Champion
     public function setIcon(string $icon): self
     {
         $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Spell[]
+     */
+    public function getSpells(): Collection
+    {
+        return $this->spells;
+    }
+
+    public function addSpell(Spell $spell): self
+    {
+        if (!$this->spells->contains($spell)) {
+            $this->spells[] = $spell;
+            $spell->setChampion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpell(Spell $spell): self
+    {
+        if ($this->spells->removeElement($spell)) {
+            // set the owning side to null (unless already changed)
+            if ($spell->getChampion() === $this) {
+                $spell->setChampion(null);
+            }
+        }
 
         return $this;
     }

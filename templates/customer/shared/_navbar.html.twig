@@ -19,8 +19,12 @@
           <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
         </li> 
         {% if app.user %}
-          <li class="nav-item">
-            <a class="nav-link active" href="#"><i class="fas fa-user"></i> Mon Profil</a>
+          <li class="nav-item dropdown">
+            <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" id="navbarDropdown">Mon Compte</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a href="#" class="dropdown-item">Mes commandes</a></li>
+              <li><a href="{{ path('customer_account_edit_password') }}" class="dropdown-item">Modifier mot de passe</a></li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>

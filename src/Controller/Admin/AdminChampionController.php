@@ -23,8 +23,9 @@ class AdminChampionController extends AbstractController
                         EntityManagerInterface $entityManager,
                         Request $request): Response
     {
+        // $championService->createChampions($entityManager, $championRepository);
         $champions = $paginator->paginate(
-            $championRepository->findAll(), /* query NOT result */
+            $championRepository->findBY([], ['name' => 'ASC']), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             3 /*limit per page*/
         );

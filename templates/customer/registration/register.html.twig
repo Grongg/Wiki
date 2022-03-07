@@ -12,13 +12,16 @@
                 </div>
                 <div class="card-body">
                     {{ form_start(registrationForm)  }}
-                    
-                    {{ form_widget(registrationForm) }}
-
-                    <button type="submit" class="btn btn-primary mt-3">
-                        Valider
-                    </button>
-
+                        {{ form_row(registrationForm.email) }}
+                        {{ form_row(registrationForm.name) }}
+                        {{ form_row(registrationForm.pseudo) }}
+                        {{ form_row(registrationForm.file) }}
+                        {{ form_row(registrationForm.plainPassword.first) }}                 
+                        {{ form_row(registrationForm.plainPassword.second) }}
+                        {{ form_row(registrationForm.agreeTerms) }}
+                            <button type="submit" class="btn btn-primary mt-3">
+                                Valider
+                            </button>
                     {{ form_end(registrationForm) }}
                 </div>
             </div>

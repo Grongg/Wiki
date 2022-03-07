@@ -1,0 +1,49 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}spell index{% endblock %}
+
+{% block body %}
+    {% include "/customer/shared/_messages_flash.html.twig" %}
+   <div class="container py-5">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3>Gestion des spells</h3>
+                            <a href="{{ path('admin_spell_new') }}" class="btn btn-primary">Ajouter</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="navigation">
+                                {{ knp_pagination_render(spells) }}
+                            </div>
+                            {% for spell in spells %}
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>{{ spell.name }}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <img src="{{ spell.spellImage }}" alt="" class="w-100 imageCard">
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="{{ path('admin_spell_edit',{ 'id' : spell.id } ) }}" class="btn btn-info w-100">Modifier</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="navigation mt-4">
+                                {{ knp_pagination_render(spells) }}
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+{% endblock %}
