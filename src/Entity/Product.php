@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,6 +31,14 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'Le champs categorie est requis.')]
     private $category;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: CommandShopLine::class)]
+    private $commandShopLines;
+
+    public function __construct()
+    {
+        $this->commandShopLines = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -79,6 +89,36 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandShopLine>
+     */
+    public function getCommandShopLines(): Collection
+    {
+        return $this->commandShopLines;
+    }
+
+    public function addCommandShopLines(CommandShopLine $commandShopLines): self
+    {
+        if (!$this->commandShopLines->contains($commandShopLines)) {
+            $this->commandShopLines[] = $commandShopLines;
+            $commandShopLines->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandShopLines(CommandShopLine $commandShopLines): self
+    {
+        if ($this->commandShopLines->removeElement($commandShopLines)) {
+            // set the owning side to null (unless already changed)
+            if ($commandShopLines->getProduct() === $this) {
+                $commandShopLines->setProduct(null);
+            }
+        }
 
         return $this;
     }

@@ -13,17 +13,16 @@
           <a class="nav-link active" aria-current="page" href="{{ path('customer_champion') }}">Champions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('cart_detail') }}">Voir le Panier</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
         </li> 
         {% if app.user %}
           <li class="nav-item dropdown">
             <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" id="navbarDropdown">Mon Compte</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a href="#" class="dropdown-item">Mes commandes</a></li>
-              <li><a href="{{ path('customer_account_edit_password') }}" class="dropdown-item">Modifier mot de passe</a></li>
+              <li><a href="#" class="dropdown-item">Mon Profil</a></li>
+              <li><a href="#" class="dropdown-item">Mes Commandes</a></li>
+              <li><a href="{{ path('customer_account_edit_password') }}" class="dropdown-item">Modifier Le Mot De Passe</a></li>
+              <li><a href="{{ path('cart_detail') }}" class="dropdown-item">Voir le Panier</a></li>
             </ul>
           </li>
           <li class="nav-item">

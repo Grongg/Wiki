@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,6 +42,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CommandShop::class, orphanRemoval: true)]
+    private $commandShops;
+
+    public function __construct()
+    {
+        $this->commandShops = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -162,6 +172,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandShop>
+     */
+    public function getCommandShops(): Collection
+    {
+        return $this->commandShops;
+    }
+
+    public function addCommandShop(CommandShop $commandShop): self
+    {
+        if (!$this->commandShops->contains($commandShop)) {
+            $this->commandShops[] = $commandShop;
+            $commandShop->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandShop(CommandShop $commandShop): self
+    {
+        if ($this->commandShops->removeElement($commandShop)) {
+            // set the owning side to null (unless already changed)
+            if ($commandShop->getUser() === $this) {
+                $commandShop->setUser(null);
+            }
+        }
 
         return $this;
     }
