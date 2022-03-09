@@ -20,7 +20,7 @@
             <a class="nav-link active" aria-current="page" href="{{ path('admin_manager') }}">Administration</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#"><i class="fas fa-user"></i> Mon Profil</a>
+            <a class="nav-link active" href="{{ path('customer_profile', {'id': app.user.id }) }}"><i class="fas fa-user"></i> Mon Profil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>
@@ -34,7 +34,7 @@
       <div class="col-md-6">
         <div class="form"> 
           <i class="fa fa-search"></i> 
-          <input type="text" class="form-control form-input" placeholder="Search anything..."> 
+          <input type="text" class="form-control form-input" placeholder="Search anything..." />
           <span class="left-pan">
             <i class="fa fa-microphone"></i>
           </span> 

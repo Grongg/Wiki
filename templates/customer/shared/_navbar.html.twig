@@ -14,14 +14,14 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
-        </li> 
+        </li>
+        {#      TODO: changer le path customer to shared profil      #}
         {% if app.user %}
           <li class="nav-item dropdown">
             <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" id="navbarDropdown">Mon Compte</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a href="#" class="dropdown-item">Mon Profil</a></li>
+              <li><a href="{{ path('customer_profile', {'id': app.user.id }) }}" class="dropdown-item">Mon Profil</a></li>
               <li><a href="#" class="dropdown-item">Mes Commandes</a></li>
-              <li><a href="{{ path('customer_account_edit_password') }}" class="dropdown-item">Modifier Le Mot De Passe</a></li>
               <li><a href="{{ path('cart_detail') }}" class="dropdown-item">Voir le Panier</a></li>
             </ul>
           </li>
@@ -38,7 +38,7 @@
         {% endif %}
       </ul>
       <div class="col-md-6">
-            <div class="form"> <i class="fa fa-search"></i> <input type="text" class="form-control form-input" placeholder="Search anything..."> <span class="left-pan"><i class="fa fa-microphone"></i></span> </div>
+            <div class="form"> <i class="fa fa-search"></i> <input type="text" class="form-control form-input" placeholder="Search anything..." /> <span class="left-pan"><i class="fa fa-microphone"></i></span> </div>
       </div>
     </div>
   </div>

@@ -36,3 +36,19 @@
     box-shadow: none;
     border: none
 }
+
+.avatar {
+    max-height: 100px;
+    height: 100px;
+}
+
+.avatarProfile {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    top: -80px;
+    left: 50px;
+    border: 3px solid white;
+}

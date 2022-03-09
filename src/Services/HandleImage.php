@@ -17,7 +17,7 @@ class HandleImage
         $this->parameterBag = $parameterBag;
     }
     
-    public function save(UploadedFile $file, object $object)
+    public function save(UploadedFile $file, object $object, bool $set)
     {
         $originFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFileName = $this->slugger->slug($originFileName);
@@ -26,12 +26,29 @@ class HandleImage
             $this->parameterBag->get('app_images_directory'),
             $uniqFileName
         );
-        $object->setImage('/uploads/images/' . $uniqFileName);
+        if ($set)
+            $object->setImage('/uploads/images/' . $uniqFileName);
+        else
+            $object->setCover('/uploads/images/' . $uniqFileName);
     }
 
-    public function edit(UploadedFile $file, object $object, string $oldImage)
+    public function prepEdit($user, $form)
     {
-        $this->save($file, $object);
+            $oldAvatar = $user->getImage();
+            $oldCover = $user->getCover();
+            /** @var UploadedFile $avatarFile */
+            $avatarFile = $form->get('avatarFile')->getData();
+            /** @var UploadedFile $coverFile */
+            $coverFile = $form->get('coverFile')->getData();
+            if ($avatarFile)
+                $this->edit($avatarFile, $user, $oldAvatar, true);
+            if ($coverFile)
+                $this->edit($coverFile, $user, $oldCover, false);
+    }
+
+    public function edit(UploadedFile $file, object $object, string $oldImage, bool $typeSet)
+    {
+        $this->save($file, $object, $typeSet);
         $fileOldImage = $this->parameterBag->get('app_images_directory') . '/../..' . $oldImage;
         if (file_exists($fileOldImage))
         {

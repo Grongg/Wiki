@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: CommandShop::class, orphanRemoval: true)]
     private $commandShops;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $cover;
+
     public function __construct()
     {
         $this->commandShops = new ArrayCollection();
@@ -202,6 +205,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $commandShop->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?string $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }

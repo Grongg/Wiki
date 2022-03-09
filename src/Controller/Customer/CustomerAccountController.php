@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**  TODO: changer le path customer to shared */
 class CustomerAccountController extends AbstractController
 {
     #[Route('/customer/account/updatepassword', name: 'customer_account_edit_password')]
@@ -31,7 +32,7 @@ class CustomerAccountController extends AbstractController
 
             $em->flush();
             $this->addFlash("success", "Votre mot de pase a bien ete modifié.");
-            return $this->redirectToRoute('customer_account_edit_password');
+            return $this->redirectToRoute('customer_profile', [ 'id' => $user->getId()]);
         }
 
         return $this->render('customer/account/edit_password.html.twig', [
