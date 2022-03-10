@@ -22,10 +22,17 @@
                         <h3>{{ champion.name | upper }}</h3>
                     </div>
                     <div class="card-body">
-                        <p>Prix : {{ champion.price | priceFormatEuro }} </p>
+                        <img src="{{ champion.icon }}" alt="champion icon">
+                        <p>Prix : {{ champion.price | BEFormatEuro }} </p>
+                        <p>Titre: {{ champion.title }}</p>
+                        <p>Resumer: </br>{{ champion.blurb }}</p>
+                        <p>Tags:</p>
+                         {% for tag in champion.tags %}
+                            <pre>{{ tag }}</pre>
+                        {% endfor %}
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('cart_add', {'id' : champion.id}) }}" class="btn btn-primary w-100">Ajouter au panier</a>
+                        <a href="#" class="btn btn-primary w-100">Ajouter au panier</a>
                     </div>
                 </div>
             </div>

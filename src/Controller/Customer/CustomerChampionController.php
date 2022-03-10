@@ -2,28 +2,41 @@
 
 namespace App\Controller\Customer;
 
+use App\Entity\Champion;
 use App\Repository\ChampionRepository;
+use App\Services\ChampionService;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/customer/champion')]
 class CustomerChampionController extends AbstractController
 {
-    #[Route('/customer/champion', name: 'customer_champion')]
-    public function index(ChampionRepository $championRepository): Response
+    #[Route('/', name: 'customer_champion_index', methods: ['GET'])]
+    public function index(ChampionRepository $championRepository,
+                          ChampionService $championService,
+                          PaginatorInterface $paginator,
+                          EntityManagerInterface $entityManager,
+                          Request $request): Response
     {
-        $champions = $championRepository->findAll();
+        // $championService->createChampions($entityManager, $championRepository);
+        $champions = $paginator->paginate(
+            $championRepository->findBY([], ['name' => 'ASC']), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
 
         return $this->render('customer/champion/champion.html.twig', [
-            'champions' => $champions
+            'champions' =>$champions
         ]);
     }
 
-    #[Route('/customer/champion/{id}', name: 'customer_champion_show')]
-    public function show(int $id, ChampionRepository $championRepository)
+    #[Route('/{id}', name: 'customer_champion_show', methods: ['GET'])]
+    public function show(Champion $champion): Response
     {
-        $champion = $championRepository->find($id);
-
         return $this->render('customer/champion/championProfile.html.twig', [
             'champion' => $champion,
         ]);

@@ -3,46 +3,35 @@
 {% block title %}Hello ChampionController!{% endblock %}
 
 {% block body %}
-    {# <div class="container py-5">
-        <div class="row">
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-            </div>
-            <div class="col-12 pb-5">
-                <h3 class="text-center">Les Champions</h3>
-            </div>
-            {% for champion in champions %}
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>{{ champion.name }}</h5>
-                        </div>
-                        <div class="card-body">
-                            <img src="{{ champion.mainImage }}" alt="" class="w-100 imageCard">
-                        </div>
-                        <div class="card-footer">
-                            <a href="{{ path('customer_champion_show',{ 'id' : champion.id }) }}" class="btn btn-info w-100">Consulter</a>
-                        </div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
+        </div>
+        <div class="col-12 pb-5">
+            <h3 class="text-center">Les Champions</h3>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(champions) }}
+        </div>
+        {% for champion in champions %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{{ champion.name }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ champion.mainImage }}" alt="" class="w-100 imageCard">
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('customer_champion_show',{ 'id' : champion.id }) }}" class="btn btn-info w-100">Consulter</a>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div> #}
-    
-    {% for champion in apiChampions %}
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5>{{ champion }}</h5>
-                </div>
-                <div class="card-body">
-                    <img src="{{ champion.mainImage }}" alt="" class="w-100 imageCard">
-                </div>
-                <div class="card-footer">
-                    <a href="{{ path('customer_champion_show',{ 'id' : champion.id }) }}" class="btn btn-info w-100">Consulter</a>
-                </div>
             </div>
+        {% endfor %}
+        <div class="navigation mt-4">
+            {{ knp_pagination_render(champions) }}
         </div>
-    {% endfor %}
+    </div>
 
 {% endblock %}
