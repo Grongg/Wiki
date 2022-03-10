@@ -22,7 +22,7 @@
                         <h3>{{ champion.name | upper }}</h3>
                     </div>
                     <div class="card-body">
-                        <p>Prix : {{ champion.price | priceFormatEuro }} </p>
+                        <p>Prix : {{ champion.price | BEFormatEuro }} </p>
                     </div>
                     <div class="card-footer">
                         <a href="{{ path('cart_add', {'id' : champion.id}) }}" class="btn btn-primary w-100">Ajouter au panier</a>
