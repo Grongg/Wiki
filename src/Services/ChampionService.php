@@ -15,14 +15,11 @@ class ChampionService
     {
         $data = DataDragonAPI::getStaticChampions()["data"];
         $champs = array_values($data);
-        // $this->deleteAllChamps($championRepository, $entityManager);
-        // dd($champs);
 
         foreach ($champs as $champ)
         {
             if (!$championRepository->findOneBy(["name" => $champ["name"]]))
             {
-                // dd($champ);
                 $champion = new Champion();
                 $champion->setName($champ["name"]);
                 $champion->setTitle($champ["title"]);
@@ -31,7 +28,6 @@ class ChampionService
                 $champion->setBlurb($champ["blurb"]);
                 $champion->setTags($champ["tags"]);
                 $champion->setPrice($this->getPrice($champion->getName()));
-                // dd($champion);
                 if ($champion)
                 {
                     $entityManager->persist($champion);
@@ -60,8 +56,12 @@ class ChampionService
             return $node->text();
         });
         for ($i = 0; $i < count($info); $i++)
+        {
             if (strpos($info[$i], $name) !== false)
+            {
                 return $info[$i + 4];
+            }
+        }
     }
 }
 

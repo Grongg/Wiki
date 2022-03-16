@@ -1,0 +1,50 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Hello Collection Controller!{% endblock %}
+
+{% block body %}
+    {% include "/customer/shared/_messages_flash.html.twig" %}
+    <div class="container py-5">
+    <div class="row">
+        <div class="col-12 pb-5">
+            <h3 class="text-center">Les Champions</h3>
+        </div>
+        {% for champ in champions %}
+            <div class="col-2 d-flex">
+                <div class="card">
+                    <div class="card-body">
+                    {% if champ.bright %}
+                        <img src="{{ champ.icon }}" alt="" class="imageCard collection" style="filter: brightness(100%);" id="down">
+                    {% else %}
+                        <img src="{{ champ.icon }}" alt="" class="imageCard collection" style="filter: brightness(20%);" id="down">
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function onClickBrightness() {
+            event.preventDefault();
+
+            const url = this.href;
+
+            axios.get(url)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        document.querySelectorAll('.collection').forEach(function(link){
+            link.addEventListener('click', onClickBrightness);
+            });
+    </script>
+
+{% endblock %}

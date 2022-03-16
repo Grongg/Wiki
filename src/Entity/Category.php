@@ -80,11 +80,9 @@ class Category
 
     public function removeProduct(Product $product): self
     {
-        if ($this->products->removeElement($product)) {
+        if ($this->products->removeElement($product) && $product->getCategory() === $this) {
             // set the owning side to null (unless already changed)
-            if ($product->getCategory() === $this) {
                 $product->setCategory(null);
-            }
         }
 
         return $this;

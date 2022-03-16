@@ -45,6 +45,9 @@ class Champion
     #[ORM\OneToMany(mappedBy: 'champion', targetEntity: Spell::class, orphanRemoval: true)]
     private $spells;
 
+    #[ORM\Column(type: 'boolean')]
+    private $bright = false;
+
     public function __construct()
     {
         $this->spells = new ArrayCollection();
@@ -165,6 +168,18 @@ class Champion
                 $spell->setChampion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBright(): ?bool
+    {
+        return $this->bright;
+    }
+
+    public function setBright(bool $bright): self
+    {
+        $this->bright = $bright;
 
         return $this;
     }

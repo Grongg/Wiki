@@ -113,11 +113,10 @@ class Product
 
     public function removeCommandShopLines(CommandShopLine $commandShopLines): self
     {
-        if ($this->commandShopLines->removeElement($commandShopLines)) {
+        if ($this->commandShopLines->removeElement($commandShopLines)
+            && $commandShopLines->getProduct() === $this) {
             // set the owning side to null (unless already changed)
-            if ($commandShopLines->getProduct() === $this) {
                 $commandShopLines->setProduct(null);
-            }
         }
 
         return $this;

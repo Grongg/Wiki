@@ -23,7 +23,6 @@ class AdminChampionController extends AbstractController
                         EntityManagerInterface $entityManager,
                         Request $request): Response
     {
-        // $championService->createChampions($entityManager, $championRepository);
         $champions = $paginator->paginate(
             $championRepository->findBY([], ['name' => 'ASC']), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -70,7 +69,6 @@ class AdminChampionController extends AbstractController
         $form = $this->createForm(ChampionType::class, $champion);
         $form->handleRequest($request);
 
-        // dd(DataDragonAPI::getStaticChampions());
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 

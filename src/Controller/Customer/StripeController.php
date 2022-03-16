@@ -26,7 +26,6 @@ class StripeController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        //dd($user);
         foreach ($detailCart as $item) {
             $productForStripe[] = [
                 'price_data' => [
