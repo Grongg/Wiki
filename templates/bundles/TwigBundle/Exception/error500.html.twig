@@ -1,0 +1,17 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div>
+        <p class="mb-5 text-center text-muted">
+            {{ status_code }}
+        </p>
+        <p class="mb-5 text-center text-muted">
+            {{ status_text }}
+        </p>
+        <p class="mb-5 text-center text-muted">
+            {{ exception.message }}
+        </p>
+    </div>
+{%  endblock %}
