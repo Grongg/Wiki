@@ -13,7 +13,10 @@ class ContentCollectionService
     {
         $contentCollection = new ContentCollection();
         $contentCollection->setCreatedAt(new \DateTimeImmutable());
-        $contentCollection->setChampions($championRepository->findAll());
+        $champions = $championRepository->findAll();
+        foreach ($champions as $champion) {
+            $contentCollection->addChampion($champion);
+        }
         $em->persist($contentCollection);
         $em->flush();
     }

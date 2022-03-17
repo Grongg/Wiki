@@ -10,17 +10,12 @@
             <h3 class="text-center">Les Champions</h3>
         </div>
         {% for champ in champions %}
-            <div class="col-2 d-flex">
-                <div class="card">
-                    <div class="card-body">
-                    {% if champ.bright %}
-                        <img src="{{ champ.icon }}" alt="" class="imageCard collection" style="filter: brightness(100%);" id="down">
-                    {% else %}
-                        <img src="{{ champ.icon }}" alt="" class="imageCard collection" style="filter: brightness(20%);" id="down">
-                    {% endif %}
-                    </div>
-                </div>
-            </div>
+            <p>bright =
+            {% if champ.bright %}
+                yes <img src="{{ champ.icon }}" alt="{{ champ.name }} icon" style="filter: brightness(100%);" id="collection">
+            {% else %}
+                no <img src="{{ champ.icon }}" alt="{{ champ.name }} icon" style="filter: brightness(30%);" id="collection">
+            {% endif%}</p>
         {% endfor %}
     </div>
 {% endblock %}
@@ -35,14 +30,16 @@
 
             axios.get(url)
                 .then(function (response) {
+                    console.log('test reussi');
                     console.log(response);
                 })
                 .catch(function (error) {
+                    console.log('test error');
                     console.log(error);
                 });
         }
 
-        document.querySelectorAll('.collection').forEach(function(link){
+        document.querySelectorAll('#collection').forEach(function(link){
             link.addEventListener('click', onClickBrightness);
             });
     </script>

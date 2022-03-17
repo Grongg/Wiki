@@ -48,9 +48,13 @@ class Champion
     #[ORM\Column(type: 'boolean')]
     private $bright = false;
 
+    #[ORM\ManyToMany(targetEntity: ContentCollection::class, inversedBy: 'champions')]
+    private $contentCollection;
+
     public function __construct()
     {
         $this->spells = new ArrayCollection();
+        $this->contentCollection = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,6 +184,30 @@ class Champion
     public function setBright(bool $bright): self
     {
         $this->bright = $bright;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ContentCollection>
+     */
+    public function getContentCollection(): Collection
+    {
+        return $this->contentCollection;
+    }
+
+    public function addContentCollection(ContentCollection $contentCollection): self
+    {
+        if (!$this->contentCollection->contains($contentCollection)) {
+            $this->contentCollection[] = $contentCollection;
+        }
+
+        return $this;
+    }
+
+    public function removeContentCollection(ContentCollection $contentCollection): self
+    {
+        $this->contentCollection->removeElement($contentCollection);
 
         return $this;
     }

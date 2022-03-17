@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ContentCollectionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContentCollectionRepository::class)]
@@ -16,8 +18,14 @@ class ContentCollection
     #[ORM\Column(type: 'datetime_immutable')]
     private $createdAt;
 
-    #[ORM\Column(type: 'array', nullable: true)]
-    private $champions = [];
+    #[ORM\ManyToMany(targetEntity: Champion::class, mappedBy: 'contentCollection')]
+    private $champions;
+
+    public function __construct()
+    {
+        $this->champions = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -36,28 +44,29 @@ class ContentCollection
         return $this;
     }
 
-    public function getChampions(): ?array
+    /**
+     * @return Collection<int, Champion>
+     */
+    public function getChampions(): Collection
     {
         return $this->champions;
     }
 
-    public function setChampions(?array $champions): self
+    public function addChampion(Champion $champion): self
     {
-        $this->champions = $champions;
+        if (!$this->champions->contains($champion)) {
+            $this->champions[] = $champion;
+            $champion->addContentCollection($this);
+        }
 
         return $this;
     }
 
-    public function addChampion(?Champion $champion): self
+    public function removeChampion(Champion $champion): self
     {
-        $this->champions[] = $champion;
-
-        return $this;
-    }
-
-    public function removeChampion(?Champion $champion): self
-    {
-        $this->champions = array_splice($this->champions, array_search($champion, $this->champions), 1);
+        if ($this->champions->removeElement($champion)) {
+            $champion->removeContentCollection($this);
+        }
 
         return $this;
     }

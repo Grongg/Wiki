@@ -18,11 +18,13 @@ class ContentCollectionController extends AbstractController
                           ContentCollectionService $contentCollectionService,
                           EntityManagerInterface $em, ContentCollectionRepository $contentCollectionRepository): Response
     {
-        //$contentCollectionService->createCollection($em, $championRepository);
-        $contentCollection = $contentCollectionRepository->findOneBy(['id' => 2]);
-        dd($contentCollection->getChampions());
+//        $contentCollectionService->createCollection($em, $championRepository);
+        $contentCollection = $contentCollectionRepository->findOneBy(['id' => 3]);
+        $champions = $contentCollection->getChampions();
+
         return $this->render('customer/collection/index.html.twig', [
-            'contentCollection' => 'ContentCollectionController',
+            'contentCollection' => $contentCollection,
+            'champions' => $champions,
         ]);
     }
 }
