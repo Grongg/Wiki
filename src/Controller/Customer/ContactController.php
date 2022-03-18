@@ -21,8 +21,6 @@ class ContactController extends AbstractController
 
             $content = $form->get('content')->getData();
 
-            // dd($content);
-
             $mailerService->sendContactMail($emailCustomer, $content);
 
             $this->addFlash("sucess", "Votre Message a bien été pris en compte.");

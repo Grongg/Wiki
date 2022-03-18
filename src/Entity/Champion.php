@@ -45,16 +45,14 @@ class Champion
     #[ORM\OneToMany(mappedBy: 'champion', targetEntity: Spell::class, orphanRemoval: true)]
     private $spells;
 
-    #[ORM\Column(type: 'boolean')]
-    private $bright = false;
+    #[ORM\OneToMany(mappedBy: 'champion', targetEntity: SelectedChampion::class, orphanRemoval: true)]
+    private $selectedChampions;
 
-    #[ORM\ManyToMany(targetEntity: ContentCollection::class, inversedBy: 'champions')]
-    private $contentCollection;
 
     public function __construct()
     {
         $this->spells = new ArrayCollection();
-        $this->contentCollection = new ArrayCollection();
+        $this->selectedChampions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,25 +187,31 @@ class Champion
     }
 
     /**
-     * @return Collection<int, ContentCollection>
+     * @return Collection<int, SelectedChampion>
      */
-    public function getContentCollection(): Collection
+    public function getSelectedChampions(): Collection
     {
-        return $this->contentCollection;
+        return $this->selectedChampions;
     }
 
-    public function addContentCollection(ContentCollection $contentCollection): self
+    public function addSelectedChampion(SelectedChampion $selectedChampion): self
     {
-        if (!$this->contentCollection->contains($contentCollection)) {
-            $this->contentCollection[] = $contentCollection;
+        if (!$this->selectedChampions->contains($selectedChampion)) {
+            $this->selectedChampions[] = $selectedChampion;
+            $selectedChampion->setChampion($this);
         }
 
         return $this;
     }
 
-    public function removeContentCollection(ContentCollection $contentCollection): self
+    public function removeSelectedChampion(SelectedChampion $selectedChampion): self
     {
-        $this->contentCollection->removeElement($contentCollection);
+        if ($this->selectedChampions->removeElement($selectedChampion)) {
+            // set the owning side to null (unless already changed)
+            if ($selectedChampion->getChampion() === $this) {
+                $selectedChampion->setChampion(null);
+            }
+        }
 
         return $this;
     }

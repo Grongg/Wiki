@@ -49,6 +49,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cover;
 
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: ContentCollection::class, cascade: ['persist', 'remove'])]
+    private $contentCollection;
+
+
+
     public function __construct()
     {
         $this->commandShops = new ArrayCollection();
@@ -220,4 +225,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getContentCollection(): ?ContentCollection
+    {
+        return $this->contentCollection;
+    }
+
+    public function setContentCollection(?ContentCollection $contentCollection): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($contentCollection === null && $this->contentCollection !== null) {
+            $this->contentCollection->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($contentCollection !== null && $contentCollection->getUser() !== $this) {
+            $contentCollection->setUser($this);
+        }
+
+        $this->contentCollection = $contentCollection;
+
+        return $this;
+    }
+
 }

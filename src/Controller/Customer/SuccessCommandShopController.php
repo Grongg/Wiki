@@ -5,30 +5,47 @@ namespace App\Controller\Customer;
 use App\Entity\User;
 use App\Repository\CommandShopRepository;
 use App\Repository\UserRepository;
+use App\Security\ChunAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class SuccessCommandShopController extends AbstractController
 {
     #[Route('/successfullpayment/{id}', name: 'stripe_success_payment')]
-    public function success($id, EntityManagerInterface $em, CommandShopRepository $commandShopRepository, UserRepository $userRepository, Request $request)
+    public function success($id, EntityManagerInterface $em,
+                            CommandShopRepository $commandShopRepository,
+                            UserRepository $userRepository,
+                            Request $request,
+                            UserAuthenticatorInterface $ue,
+                            ChunAuthenticator $chun)
     {
-        //$user = $this->getUser();
         $user = $userRepository->find($id);
-        //dd($user);
 
+        if ($user)
+        {
+            $commandShop = $commandShopRepository->findOneBy([
+                'user' => $user,
+                ], [
+                    'id' => 'DESC'
+            ]);
 
-        $commandShop = $commandShopRepository->findOneBy([
-            'user' => $user,
-            ], [
-                'id' => 'DESC'
-        ]);
+            $commandShop->setIsPayed(true);
+            $em->flush();
+            $ue->authenticateUser(
+                $user,
+                $chun,
+                $request
+            );
 
-        $commandShop->setIsPayed(true);
-        $em->flush();
-        return $this->redirectToRoute('thank_you_page');
+            return $this->redirectToRoute('thank_you_page');
+        }
+        else
+        {
+            return $this->redirectToRoute('customer_home');
+        }
     }
 
     #[Route('/failedpayment', name: 'stripe_failed_payment')]

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Customer;
 
+use App\Entity\ContentCollection;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\ChunAuthenticator;
@@ -32,6 +33,9 @@ class CustomerRegistrationController extends AbstractController
             );
 
             $entityManager->persist($user);
+            $contentCollection = new ContentCollection();
+            $contentCollection->setUser($user);
+            $entityManager->persist($contentCollection);
             $entityManager->flush();
             // do anything else you need here, like send an email
 

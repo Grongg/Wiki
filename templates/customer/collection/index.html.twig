@@ -9,39 +9,71 @@
         <div class="col-12 pb-5">
             <h3 class="text-center">Les Champions</h3>
         </div>
-        {% for champ in champions %}
-            <p>bright =
-            {% if champ.bright %}
-                yes <img src="{{ champ.icon }}" alt="{{ champ.name }} icon" style="filter: brightness(100%);" id="collection">
-            {% else %}
-                no <img src="{{ champ.icon }}" alt="{{ champ.name }} icon" style="filter: brightness(30%);" id="collection">
-            {% endif%}</p>
-        {% endfor %}
+        <div class="col-12">
+            <div class="row">
+                {% for champ in champions %}
+                    {% if champ["isSelected"] is same as true %}
+                        <div class="col-sm-6 col-md-3 mt-2">
+                           <img src="{{ champ["champion"].icon }}" alt="{{ champ["champion"].name }} icon" class="collection imageChampion" data-champ="{{ champ["champion"].id }}" style="border-color: gold; filter: brightness(100%); -webkit-box-shadow: 0px 0px 5px 1px gold; box-shadow: 0px 0px 5px 1px gold;">
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6 col-md-3 mt-2">
+                            <img src="{{ champ["champion"].icon }}" alt="{{ champ["champion"].name }} icon" class="collection imageChampion" data-champ="{{ champ["champion"].id }}">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary" id="save">Enregistrer</button>
+        </div>
     </div>
-{% endblock %}
 
-{% block javascripts %}
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    {%  if app.user %}
     <script>
-        function onClickBrightness() {
-            event.preventDefault();
-
-            const url = this.href;
-
-            axios.get(url)
-                .then(function (response) {
-                    console.log('test reussi');
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log('test error');
-                    console.log(error);
-                });
-        }
-
-        document.querySelectorAll('#collection').forEach(function(link){
-            link.addEventListener('click', onClickBrightness);
+        const champions = Array.from(document.getElementsByClassName('collection'));
+        const toggleChampion = (champ) => {
+            let champStyle = "border-color: gold; filter: brightness(100%); -webkit-box-shadow: 0px 0px 5px 1px gold; box-shadow: 0px 0px 5px 1px gold;";
+            if (champ.getAttribute("style") === champStyle)
+            {
+                champ.setAttribute("style", "");
+            }
+            else
+            {
+                champ.setAttribute("style", champStyle);
+            }
+            let champId = champ.getAttribute("data-champ");
+            let url = "/toggle_collection/" + champId;
+            axios.get(url).then(function (response) {
+                console.log(response);
+            })
+        };
+        champions.forEach((champ) => {
+            champ.addEventListener('click', function () {
+                toggleChampion(champ);
             });
+        })
     </script>
-
+    {%  else %}
+        <script>
+            const champions = Array.from(document.getElementsByClassName('collection'));
+            const toggleChampion = (champ) => {
+                let champStyle = "border-color: gold; filter: brightness(100%); -webkit-box-shadow: 0px 0px 5px 1px gold; box-shadow: 0px 0px 5px 1px gold;";
+                if (champ.getAttribute("style") === champStyle)
+                {
+                    champ.setAttribute("style", "");
+                }
+                else
+                {
+                    champ.setAttribute("style", champStyle);
+                }
+            };
+            champions.forEach((champ) => {
+                champ.addEventListener('click', function () {
+                    toggleChampion(champ);
+                });
+            })
+        </script>
+    {% endif %}
 {% endblock %}

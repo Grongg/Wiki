@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContentCollectionRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class ContentCollection
 {
     #[ORM\Id]
@@ -18,14 +19,25 @@ class ContentCollection
     #[ORM\Column(type: 'datetime_immutable')]
     private $createdAt;
 
-    #[ORM\ManyToMany(targetEntity: Champion::class, mappedBy: 'contentCollection')]
-    private $champions;
+
+    #[ORM\OneToOne(inversedBy: 'contentCollection', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
+    #[ORM\OneToMany(mappedBy: 'contentCollection', targetEntity: SelectedChampion::class)]
+    private $selectedChampions;
 
     public function __construct()
     {
-        $this->champions = new ArrayCollection();
+        $this->selectedChampions = new ArrayCollection();
     }
 
+    #[ORM\PrePersist]
+    public function prePersist()
+    {
+        if (empty($this->createdAt)) {
+            $this->createdAt = new \DateTimeImmutable();
+        }
+    }
 
     public function getId(): ?int
     {
@@ -44,30 +56,47 @@ class ContentCollection
         return $this;
     }
 
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     /**
-     * @return Collection<int, Champion>
+     * @return Collection<int, SelectedChampion>
      */
-    public function getChampions(): Collection
+    public function getSelectedChampions(): Collection
     {
-        return $this->champions;
+        return $this->selectedChampions;
     }
 
-    public function addChampion(Champion $champion): self
+    public function addSelectedChampion(SelectedChampion $selectedChampion): self
     {
-        if (!$this->champions->contains($champion)) {
-            $this->champions[] = $champion;
-            $champion->addContentCollection($this);
+        if (!$this->selectedChampions->contains($selectedChampion)) {
+            $this->selectedChampions[] = $selectedChampion;
+            $selectedChampion->setContentCollection($this);
         }
 
         return $this;
     }
 
-    public function removeChampion(Champion $champion): self
+    public function removeSelectedChampion(SelectedChampion $selectedChampion): self
     {
-        if ($this->champions->removeElement($champion)) {
-            $champion->removeContentCollection($this);
+        if ($this->selectedChampions->removeElement($selectedChampion)) {
+            // set the owning side to null (unless already changed)
+            if ($selectedChampion->getContentCollection() === $this) {
+                $selectedChampion->setContentCollection(null);
+            }
         }
 
         return $this;
     }
+
 }
