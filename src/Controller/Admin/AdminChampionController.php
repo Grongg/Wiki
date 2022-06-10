@@ -29,6 +29,8 @@ class AdminChampionController extends AbstractController
             3 /*limit per page*/
         );
 
+
+
         return $this->render('admin/champion/index.html.twig', [
             'champions' =>$champions
         ]);

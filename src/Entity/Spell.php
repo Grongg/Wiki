@@ -34,22 +34,35 @@ class Spell
     #[Assert\NotBlank(message: 'Le champs image du sort est requis.')]
     private $spellImage;
 
-    #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank(message: 'Le champs coût est requis.')]
-    private $cost;
-
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Le champs type est requis.')]
     private $type;
-
-    #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank(message: 'Le champs délais de récuperation est requis.')]
-    private $cooldown;
 
     #[ORM\ManyToOne(targetEntity: Champion::class, inversedBy: 'spells')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'Le champs champion est requis.')]
     private $champion;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $spellId;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isToggle;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isBoth;
+
+    #[ORM\Column(type: 'array')]
+    private $cost = [];
+
+    #[ORM\Column(type: 'array')]
+    private $cooldown = [];
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $rangeType;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $damageType;
 
     public function getId(): ?int
     {
@@ -116,18 +129,6 @@ class Spell
         return $this;
     }
 
-    public function getCost(): ?int
-    {
-        return $this->cost;
-    }
-
-    public function setCost(int $cost): self
-    {
-        $this->cost = $cost;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
@@ -140,18 +141,6 @@ class Spell
         return $this;
     }
 
-    public function getCooldown(): ?int
-    {
-        return $this->cooldown;
-    }
-
-    public function setCooldown(int $cooldown): self
-    {
-        $this->cooldown = $cooldown;
-
-        return $this;
-    }
-
     public function getChampion(): ?Champion
     {
         return $this->champion;
@@ -160,6 +149,90 @@ class Spell
     public function setChampion(?Champion $champion): self
     {
         $this->champion = $champion;
+
+        return $this;
+    }
+
+    public function getSpellId(): ?string
+    {
+        return $this->spellId;
+    }
+
+    public function setSpellId(string $spellId): self
+    {
+        $this->spellId = $spellId;
+
+        return $this;
+    }
+
+    public function isIsToggle(): ?bool
+    {
+        return $this->isToggle;
+    }
+
+    public function setIsToggle(bool $isToggle): self
+    {
+        $this->isToggle = $isToggle;
+
+        return $this;
+    }
+
+    public function isIsBoth(): ?bool
+    {
+        return $this->isBoth;
+    }
+
+    public function setIsBoth(bool $isBoth): self
+    {
+        $this->isBoth = $isBoth;
+
+        return $this;
+    }
+
+    public function getCost(): ?array
+    {
+        return $this->cost;
+    }
+
+    public function setCost(array $cost): self
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    public function getCooldown(): ?array
+    {
+        return $this->cooldown;
+    }
+
+    public function setCooldown(array $cooldown): self
+    {
+        $this->cooldown = $cooldown;
+
+        return $this;
+    }
+
+    public function getRangeType(): ?string
+    {
+        return $this->rangeType;
+    }
+
+    public function setRangeType(string $rangeType): self
+    {
+        $this->rangeType = $rangeType;
+
+        return $this;
+    }
+
+    public function getDamageType(): ?string
+    {
+        return $this->damageType;
+    }
+
+    public function setDamageType(string $damageType): self
+    {
+        $this->damageType = $damageType;
 
         return $this;
     }

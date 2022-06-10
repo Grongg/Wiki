@@ -3,53 +3,87 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    {% include "/customer/shared/_messages_flash.html.twig" %}    
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-12 pb-5">
-                <h3 class="text-center">Les Categories</h3>
+    {% include "/customer/shared/_messages_flash.html.twig" %}
+    <section class="d-flex justify-content-start" >
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators" style="margin-right: 4em;">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
-            {% for category in categories %}
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>{{ category.name }}</h5>
+            <div class="carousel-inner">
+                <div class="carousel-item active d-flex flex-row">
+                    <div id="mainImage">
+                        <div class="d-flex flex-column align-items-end" style="margin-right: 1em;">
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="margin-top:0.4em;" >
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="margin-top: 1em;">
                         </div>
-                        <div class="card-body">
-                            <img src="{{ category.image }}" alt="" class="w-100 imageCard">
+                        <div class="d-md-flex flex-column carousel-caption d-none d-md-block" style="margin-right: 35em;">
+                            <h5 >{{ previewChamps[0].name }}</h5>
+                            <p>{{ previewChamps[0].title }}</p>
                         </div>
-                        <div class="card-footer">
-                            <a href="{{ path('customer_category',{ 'id' : category.id }) }}" class="btn btn-info w-100">Consulter</a>
+                    </div>
+                    <div class="d-flex flex-column justify-content-around" style="background-color: rgb(33,37,41); height: 35em; width: 35em; padding-left: 2em;">
+                        <div class="container d-flex flex-row align-items-center" style="color: white;">
+                            <p>passive</p>
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="">
+                            <div style="margin-left: 1em;">
+                                <h6>nom du spell</h6>
+                                <p class="text-truncate" style="max-width: 30vh;">resume du spell tres tres long... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi dolores dolorum ex impedit natus officiis omnis perspiciatis quis. Error hic natus nemo, non nulla reprehenderit saepe ullam ut. </p>
+                            </div>
+                        </div>
+                        <div class="container d-flex flex-row align-items-center" style="color: white;">
+                            <p>passive</p>
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="">
+                            <div style="margin-left: 1em;">
+                                <h6>nom du spell</h6>
+                                <p class="text-truncate" style="max-width: 30vh;">resume du spell tres tres long... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi dolores dolorum ex impedit natus officiis omnis perspiciatis quis. Error hic natus nemo, non nulla reprehenderit saepe ullam ut. </p>
+                            </div>
+                        </div>
+                        <div class="container d-flex flex-row align-items-center" style="color: white;">
+                            <p>passive</p>
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="">
+                            <div style="margin-left: 1em;">
+                                <h6>nom du spell</h6>
+                                <p class="text-truncate" style="max-width: 30vh;">resume du spell tres tres long... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi dolores dolorum ex impedit natus officiis omnis perspiciatis quis. Error hic natus nemo, non nulla reprehenderit saepe ullam ut. </p>
+                            </div>
+                        </div>
+                        <div class="container d-flex flex-row align-items-center" style="color: white;">
+                            <p>passive</p>
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="">
+                            <div style="margin-left: 1em;">
+                                <h6>nom du spell</h6>
+                                <p class="text-truncate" style="max-width: 30vh;">resume du spell tres tres long... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi dolores dolorum ex impedit natus officiis omnis perspiciatis quis. Error hic natus nemo, non nulla reprehenderit saepe ullam ut. </p>
+                            </div>
+                        </div>
+                        <div class="container d-flex flex-row align-items-center" style="color: white;">
+                            <p>passive</p>
+                            <img src="https://cdn.discordapp.com/attachments/981612270591279174/981641614835462144/unknown.png" alt="" id="spellImage" style="">
+                            <div style="margin-left: 1em;">
+                                <h6>nom du spell</h6>
+                                <p class="text-truncate" style="max-width: 30vh;">resume du spell tres tres long... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam commodi dolores dolorum ex impedit natus officiis omnis perspiciatis quis. Error hic natus nemo, non nulla reprehenderit saepe ullam ut. </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-        <div class="container py-5">
-            <div class="row">
-            <div class="col-12 pb-5">
-                <h3 class="text-center">Les Produits</h3>
-            </div>
-            {% for product in products %}
-                <div class="col-4 mt-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>{{ product.name | upper }}</h5>
-                        </div>
-                        <div class="card-body">
-                            <img src="{{ product.image }}" alt="" class="w-100 imageCard">
-                        </div>
-                        <div class="card-footer">
-                            <p>Prix : {{ product.price | priceFormatEuro }}</p>
-                            <p>Catégorie : {{ product.category.name}}</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="{{ path('customer_product',{ 'id' : product.id }) }}" class="btn btn-info w-100">Consulter</a>
-                        </div>                     
+                <div class="carousel-item" id="mainImage">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ previewChamps[1].name }}</h5>
+                        <p>{{ previewChamps[1].title }}</p>
                     </div>
                 </div>
-            {% endfor %}
+                <div class="carousel-item" id="mainImage">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ previewChamps[2].name }}</h5>
+                        <p>{{ previewChamps[2].title }}</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+    <section>
+        <div class="pt-5 d-flex justify-content-center">
+            <h2 id="test">Le Shop</h2>
+        </div>
+    </section>
 {% endblock %}
