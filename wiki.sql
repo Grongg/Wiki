@@ -20,7 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `wiki`
 --
-CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `wiki`;
 
 -- --------------------------------------------------------

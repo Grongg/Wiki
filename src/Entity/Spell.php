@@ -16,53 +16,50 @@ class Spell
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Le champs nom est requis.')]
-    private $name;
-
-    #[ORM\Column(type: 'boolean')]
-    #[Assert\NotBlank(message: 'Le champs actif est requis.')]
-    private $isActive;
-
-    #[ORM\Column(type: 'boolean')]
-    #[Assert\NotBlank(message: 'Le champs passif est requis.')]
-    private $isPassive;
-
-    #[ORM\Column(type: 'string', length: 255)]
+    private $name; //y
+    
+    #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'Le champs description est requis.')]
-    private $resume;
-
+    private $resume; //y
+    
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Le champs image du sort est requis.')]
-    private $spellImage;
-
+    private $spellImage;//y 
+    
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(message: 'Le champs type est requis.')]
-    private $type;
+    private $type; //y 
+    
+    #[ORM\Column(type: 'string', length: 255)]
+    private $spellId; //y
+    
+    #[ORM\Column(type: 'boolean')]
+    private $isToggle; //y 
+    
+    #[ORM\Column(type: 'boolean')]
+    private $isBoth; //y
+    
+    #[ORM\Column(type: 'boolean')]
+    private $isChampPassive; //y 
+    
+    #[ORM\Column(type: 'boolean')]
+    #[Assert\NotBlank(message: 'Le champs actif est requis.')]
+    private $isActive; //y
+    
+    #[ORM\Column(type: 'boolean')]
+    #[Assert\NotBlank(message: 'Le champs passif est requis.')]
+    private $isPassive; //y
 
+    #[ORM\Column(type: 'array')]
+    private $cost = []; //y
+    
+    #[ORM\Column(type: 'array')]
+    private $cooldown = []; //y
+    
     #[ORM\ManyToOne(targetEntity: Champion::class, inversedBy: 'spells')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank(message: 'Le champs champion est requis.')]
     private $champion;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $spellId;
-
-    #[ORM\Column(type: 'boolean')]
-    private $isToggle;
-
-    #[ORM\Column(type: 'boolean')]
-    private $isBoth;
-
-    #[ORM\Column(type: 'array')]
-    private $cost = [];
-
-    #[ORM\Column(type: 'array')]
-    private $cooldown = [];
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $rangeType;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $damageType;
 
     public function getId(): ?int
     {
@@ -213,27 +210,16 @@ class Spell
         return $this;
     }
 
-    public function getRangeType(): ?string
+    public function isIsChampPassive(): ?bool
     {
-        return $this->rangeType;
+        return $this->isChampPassive;
     }
 
-    public function setRangeType(string $rangeType): self
+    public function setIsChampPassive(bool $isChampPassive): self
     {
-        $this->rangeType = $rangeType;
+        $this->isChampPassive = $isChampPassive;
 
         return $this;
     }
 
-    public function getDamageType(): ?string
-    {
-        return $this->damageType;
-    }
-
-    public function setDamageType(string $damageType): self
-    {
-        $this->damageType = $damageType;
-
-        return $this;
-    }
 }

@@ -2,11 +2,15 @@
 
 namespace App\Controller\Customer;
 
-use App\Repository\ChampionRepository;
+use Goutte\Client;
+use App\Entity\Spell;
+use App\Services\SpellService;
+use App\Services\ChampionService;
+use App\Repository\SpellRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\ChampionRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Goutte\Client;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,15 +22,31 @@ class CustomerHomeController extends AbstractController
 {
     #[Route('/', name: 'customer_home')]
     public function index(CategoryRepository $categoryRepository,
-                            ProductRepository $productRepository,
-                            ChampionRepository $championRepository): Response
+    ProductRepository $productRepository,
+    ChampionRepository $championRepository,
+    EntityManagerInterface $em,
+    ChampionService $championService,
+    SpellService $spellService, SpellRepository $spellRepository): Response
     {
-
         $products = $productRepository->findBy([],[
             'id' => 'DESC'
         ],
         6);
-
+        // $championService->deleteAllChamps($championRepository, $em);
+        $championService->createChampions($em, $championRepository, $spellService, $spellRepository);
+        $test = $spellRepository->findBy([], [
+            'name' => 'ASC'
+        ]);
+        $spellNames = [];
+        for ($i=0; $i < count($test); $i++) { 
+            array_push($spellNames, $test[$i]->getName());
+        }
+        $spellCount = array_count_values($spellNames);
+        foreach ($spellCount as $key => $value) {
+            if ($value > 1)
+                $em->remove($firstChamp = $spellRepository->findOneBy(["name" => $key]));
+        }
+        $em->flush();
         $count = 0;
         foreach($championRepository->findAll() as $val)
             $count++;
@@ -37,57 +57,27 @@ class CustomerHomeController extends AbstractController
         );
         $firstId = $firstChamp->getId();
         for ($i = 0; $i < 3; $i++)
-            $randChamps[] = rand($firstId, $firstId + $count);
+        {
+            $rand = rand($firstId, $firstId + $count);
+            if ($championRepository->find($rand) && 
+                $championRepository->find($rand)->getSpells()[0]->isIsToggle() === true 
+                || $championRepository->find($rand)->getSpells()[1]->isIsToggle() === true
+                || $championRepository->find($rand)->getSpells()[2]->isIsToggle() === true
+                || $championRepository->find($rand)->getSpells()[3]->isIsToggle() === true
+                || $championRepository->find($rand)->getName() === "Udyr")
+            {
+                $rand = rand($firstId, $firstId + $count);
+                $i--;
+            }
+            else
+                $randChamps[] = $rand;
+        }
         $selectedChampions = [];
         for($i = 0; $i < count($randChamps); $i++)
-              $selectedChampions[] = $championRepository->find($randChamps[$i]);
+        $selectedChampions[] = $championRepository->find($randChamps[$i]);
 
-        $varus = DataDragonAPI::getStaticChampionDetails("Varus");
-
-        $client = new Client();
-//        $info = $crawler->filter(".skill_innate > .skill_header > .ability-info-container > div > div > div > p > span > b")->each(function ($node) {
-//            return $node->text();
-//        });
-//        $info2 = $crawler->filter(".skill_E > .skill_header > .ability-info-container > div > div > div > p > span > b")->each(function ($node) {
-//            return $node->text();
-//        });
-//
-//        $cnt = 0;
-//        dump($info2);
-//        for ($i = 0; $i < count($info2); $i++)
-//        {
-//            dump($info2[$i]);
-//            if ($info2[$i] === "Innate:")
-//            {
-//                $cnt++;
-//            }
-//        }
-//        $spellData = DataDragonAPI::getStaticChampionDetails("Akshan")["data"]["Akshan"]["spells"][0];
-//        dump($crawler, $info2, $cnt, "hey ", $spellData["cost"]);
-
-        $crawler = $client->request('GET', 'https://leagueoflegends.fandom.com/wiki/Twisted Fate/LoL');
-        $typeData = $crawler->filter(".skill_e > .skill_header > .ability-info-container > div")->each(function ($node) {
-            return $node->text();
-        });
-//        dd($type);
-//        dd($typeData[0], strpos($typeData[0], "COST"));
-        if (strpos($typeData[0], "COST") !== false)
-        {
-            $dirtyType = explode("COST", $typeData[0])[1] ;
-            $dirtyType = explode("COOLDOWN", $dirtyType)[0];
-            $dirtyType = explode(" ", $dirtyType);
-            $type = $dirtyType[count($dirtyType) - 2];
-        }
-        else
-        {
-            $type = "empty";
-        }
-        dd($type);
-//
-        dump(DataDragonAPI::getSpellIcon($varus["data"]["Varus"]["spells"][0]["id"]));
-        dd($varus["data"]["Varus"]["spells"]);
-        dd($selectedChampions[0]);
-
+        // dump(DataDragonAPI::getStaticChampionDetails("Illaoi"));
+        // dump($selectedChampions[0]);
 
         return $this->render('customer/home/index.html.twig', [
             'categories' => $categoryRepository->findAll(),

@@ -31,10 +31,6 @@ class Champion
     #[Assert\NotBlank(message: 'Le champs titre est requis.')]
     private $title;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message: 'Le champs resume est requis.')]
-    private $blurb;
-
     #[ORM\Column(type: 'array')]
     #[Assert\NotBlank(message: 'Le champs tags est requis.')]
     private $tags = [];
@@ -42,12 +38,17 @@ class Champion
     #[ORM\Column(type: 'string', length: 255)]
     private $icon;
 
-    #[ORM\OneToMany(mappedBy: 'champion', targetEntity: Spell::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'champion', targetEntity: Spell::class, orphanRemoval: true, cascade: array("persist"))]
     private $spells;
 
     #[ORM\OneToMany(mappedBy: 'champion', targetEntity: SelectedChampion::class, orphanRemoval: true)]
     private $selectedChampions;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isToggle;
+
+    #[ORM\Column(type:"text", length: 65535)]
+    private $blurb;
 
     public function __construct()
     {
@@ -104,18 +105,6 @@ class Champion
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getBlurb(): ?string
-    {
-        return $this->blurb;
-    }
-
-    public function setBlurb(string $blurb): self
-    {
-        $this->blurb = $blurb;
 
         return $this;
     }
@@ -215,4 +204,29 @@ class Champion
 
         return $this;
     }
+
+    public function isIsToggle(): ?bool
+    {
+        return $this->isToggle;
+    }
+
+    public function setIsToggle(bool $isToggle): self
+    {
+        $this->isToggle = $isToggle;
+
+        return $this;
+    }
+
+    public function getBlurb(): ?string
+    {
+        return $this->blurb;
+    }
+
+    public function setBlurb(string $blurb): self
+    {
+        $this->blurb = $blurb;
+
+        return $this;
+    }
+
 }
