@@ -47,7 +47,7 @@ class AdminCategoryController extends AbstractController
             $file = $form->get('file')->getData();
             if ($file)
             {
-                $handleImage->save($file, $category);
+                $handleImage->save($file, $category, true);
             }
 
             $entityManager->persist($category);
@@ -84,7 +84,7 @@ class AdminCategoryController extends AbstractController
             $file = $form->get('file')->getData();
             if ($file)
             {
-                $handleImage->edit($file, $category, $oldImage);
+                $handleImage->edit($file, $category, $oldImage, true);
             }
 
 

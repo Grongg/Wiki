@@ -46,7 +46,7 @@ class AdminProductController extends AbstractController
             $file = $form->get('file')->getData();
             if ($file)
             {
-                $handleImage->save($file, $product);
+                $handleImage->save($file, $product, true);
             }
 
             $entityManager->persist($product);
@@ -82,7 +82,7 @@ class AdminProductController extends AbstractController
             $file = $form->get('file')->getData();
             if ($file)
             {
-                $handleImage->edit($file, $product, $oldImage);
+                $handleImage->edit($file, $product, $oldImage, true);
             }            
             $entityManager->flush();
 
@@ -100,6 +100,8 @@ class AdminProductController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);
+            for ($i=0; $i < count($product->getCommandShopLines()) ; $i++)
+                $entityManager->remove($product->getCommandShopLines()[$i]);
             $entityManager->flush();
         }
 
