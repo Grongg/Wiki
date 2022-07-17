@@ -22,6 +22,7 @@ class ContentCollectionController extends AbstractController
         $champions = $championRepository->findAll();
         $champTab = [];
 
+        /** @var User $user */
         $user = $this->getUser();
 
         if ($user)
