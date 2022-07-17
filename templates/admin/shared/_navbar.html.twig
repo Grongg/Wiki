@@ -1,44 +1,38 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('admin_home') }}">Wiki</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Collection Tracker</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('admin_champion_index') }}">Champions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
-        </li>         
-        {% if app.user %}
+    <div class="container" style="height:40%; width:40%;">
+      <a class="navbar-brand" href="{{ path('admin_home') }}">
+        <img src="https://cdn.discordapp.com/attachments/199640883971358720/998277048177004594/unknown.png" alt="logo" style="height:25%; width:25%;">
+      </a>
+    </div>
+    <div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('admin_manager') }}">Administration</a>
+            <a class="nav-link active" aria-current="page" href="{{ path('admin_champion_index') }}">Champions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{{ path('customer_profile', {'id': app.user.id }) }}"><i class="fas fa-user"></i> Mon Profil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-              <a class="nav-link active" href="{{ path('app_login') }}">Se Connecter</a>
-          </li>
-        {% endif %}
-      </ul>
-      <div class="col-md-6">
-        <div class="form"> 
-          <i class="fa fa-search"></i> 
-          <input type="text" class="form-control form-input" placeholder="Search anything..." />
-          <span class="left-pan">
-            <i class="fa fa-microphone"></i>
-          </span> 
-        </div>
+            <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
+          </li>         
+          {% if app.user %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ path('admin_manager') }}">Administration</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ path('customer_profile', {'id': app.user.id }) }}"><i class="fas fa-user"></i> Mon Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ path('app_login') }}">Se Connecter</a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
     </div>
   </div>
