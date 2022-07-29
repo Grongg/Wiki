@@ -11,13 +11,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-    /**  TODO: changer le path customer to shared */
 class ProfileController extends AbstractController
 {
     #[Route('/profile/{id}', name: 'customer_profile')]
     public function index() : Response
     {
-        return $this->render('customer/profile/index.html.twig');
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->render('customer/profile/index.html.twig', [
+            "commands" => $user->getCommandShops(),
+        ]);
     }
 
     #[Route('/profile/{id}/edit', name: 'customer_edit_profile')]
@@ -34,7 +39,7 @@ class ProfileController extends AbstractController
         }
         return $this->renderForm('customer/profile/edit.html.twig', [
             'user' => $user,
-            'EditProfileForm' => $form
+            'EditProfileForm' => $form,
         ]);
     }
 

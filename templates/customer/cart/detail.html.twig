@@ -1,5 +1,7 @@
 {% extends "customer/base.html.twig" %}
 
+{% block title %} Wiki - Mon Panier {% endblock %}
+
 {% block body %}
 
     {% include "/customer/shared/_messages_flash.html.twig" %}    
@@ -9,10 +11,6 @@
                 <h3 class="text-center">
                     Mon panier
                 </h3>
-            </div>
-        
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
             </div>
             <div class="col-sm-12 col-md-10 col-lg-8 mt-3">
 
@@ -31,26 +29,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                   
                                         {% for item in cart %}
-                        
-                                            <tr>
+                                            <tr class="d-flex align-items-between">
                                                 <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart">
-                                                        <div class="d-flex flex-column align-items-center justify-content-center">
+                                                    <div class="d-flex flex-column justify-content-start">
+                                                        <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart w-100 h-50">
+                                                        <div class="d-flex flex-column text-center">
                                                             <p>{{ item.product.name }}</p>
                                                             <a class="btn btn-link text-danger btn-sm" href="{{ path('cart_remove',{'id' : item.product.id }) }}"><i class="fas fa-trash"></i> Supprimer</a>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>{{ item.product.price | priceFormatEuro }}</td>
                                                 <td>
-                                                    <a class="btn btn-dark" href="{{ path('cart_decrement',{'id': item.product.id}) }}"><i class="fas fa-minus-circle"></i></a>
-                                                    <button class="btn btn-light">{{ item.qty }}</button>
-                                                    <a class="btn btn-dark" href="{{ path('cart_add',{'id': item.product.id}) }}?returnToCart=true"><i class="fas fa-plus-circle"></i></a>
+                                                    <td>{{ item.product.price | priceFormatEuro }}</td>
+                                                    <td>
+                                                        <div class="d-flex flex-row">
+                                                            <a class="btn btn-dark" href="{{ path('cart_decrement',{'id': item.product.id}) }}"><i class="fas fa-minus-circle"></i></a>
+                                                            <button class="btn btn-light">{{ item.qty }}</button>
+                                                            <a class="btn btn-dark" href="{{ path('cart_add',{'id': item.product.id}) }}?returnToCart=true"><i class="fas fa-plus-circle"></i></a>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ item.total | priceFormatEuro }}</td>
                                                 </td>
-                                                <td>{{ item.total | priceFormatEuro }}</td>
                                             </tr>
                                         {% endfor %}
                                         <tr>
@@ -63,13 +63,13 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <a href="{{ path('command_recap') }}" class="btn btn-primary"> Valider mon panier</a>
+                                <a href="{{ path('command_recap') }}" class="btn btn-secondary"> Valider mon panier</a>
                             </div>
 
                         {% else %}
-                            <p>Le panier est vide.</p>
-                            <br/>
-                            <a class="btn btn-link" href="{{ path('customer_home') }}">Continuer le shopping</a>
+                            <p class="d-flex justify-content-center mt-4"> Le panier est vide.</p>
+                            <br/>   
+                            <a class="btn btn-link d-flex text-black justify-content-center" href="{{ path('customer_home') }}">Continuer le shopping</a>
                         {% endif  %}
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <div class="container" style="height:40%; width:40%;">
+    <div class="container " style="height:40%; width:40%;">
       <a class="navbar-brand" href="{{ path('customer_home') }}">
         <img src="https://cdn.discordapp.com/attachments/199640883971358720/998273203795394661/logo_test.png" alt="logo" style="height:25%; width:25%;">
       </a>
@@ -22,6 +22,7 @@
           </li>
           {% if app.user %}
             <li class="nav-item dropdown">
+              <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link active dropdown-toggle" id="navbarDropdown">Mon Compte</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a href="{{ path('customer_profile', {'id': app.user.id }) }}" class="dropdown-item">Mon Profil</a></li>
                 <li><a href="{{ path('cart_detail') }}" class="dropdown-item">Voir le Panier</a></li>

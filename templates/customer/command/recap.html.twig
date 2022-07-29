@@ -1,19 +1,15 @@
 {% extends "customer/base.html.twig" %}
 
+{% block title %}Wiki - Recap Commande{% endblock %}
+
 {% block body %}
 
     {% include "/customer/shared/_messages_flash.html.twig" %}
     <div class="container py-5">
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center">
-                    Recapitulatif de la commande
-                </h3>
-            </div>
-
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-            </div>
+                <h3 class="text-center">Recapitulatif de la commande</h3>
+            </div>  
             <div class="col-sm-12 col-md-6 mt-3">
                 <div class="card">
                     <div class="card-body">
@@ -23,7 +19,7 @@
                                 <tr>
                                     <th scope="col">Produit</th>
                                     <th scope="col">P.U</th>
-                                    <th scope="col" >Qté</th>
+                                    <th scope="col">Qté</th>
                                     <th scope="col">Total</th>
                                 </tr>
                                 </thead>
@@ -31,10 +27,10 @@
 
                                 {% for item in cart %}
 
-                                    <tr>
+                                    <tr class="d-flex align-items-between">
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart">
+                                                <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart" style="width: 70%;">
                                                 <div class="d-flex flex-column align-items-center justify-content-center">
                                                     <p>{{ item.product.name }}</p>
                                                 </div>
@@ -70,7 +66,7 @@
                         {{ form_start(form) }}
                         {{ form_widget(form) }}
                             <button type="submit" class="btn btn-success w-100 mt-3" id="buttonSubmit">Valider l'adresse et payer la commande</button>
-                            <button class="btn btn-primary" type="button" disabled id="buttonSpinner" style="display:none;">
+                            <button class="btn btn-secondary" type="button" disabled id="buttonSpinner" style="display:none;">
                                 <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                                 Redirection vers stripe en cours...
                             </button>

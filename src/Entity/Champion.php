@@ -31,8 +31,7 @@ class Champion
     #[Assert\NotBlank(message: 'Le champs titre est requis.')]
     private $title;
 
-    #[ORM\Column(type: 'array')]
-    #[Assert\NotBlank(message: 'Le champs tags est requis.')]
+    #[ORM\Column(type: 'array', nullable: true)]
     private $tags = [];
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -44,7 +43,7 @@ class Champion
     #[ORM\OneToMany(mappedBy: 'champion', targetEntity: SelectedChampion::class, orphanRemoval: true)]
     private $selectedChampions;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private $isToggle;
 
     #[ORM\Column(type:"text", length: 65535)]

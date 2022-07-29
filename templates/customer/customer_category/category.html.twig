@@ -1,6 +1,6 @@
 {% extends 'customer/base.html.twig' %}
 
-{% block title %}Hello CustomerProductController!{% endblock %}
+{% block title %}Wiki - {{ category.name | capitalize }}{% endblock %}
 
 {% block body %}
     {% include "/customer/shared/_messages_flash.html.twig" %}

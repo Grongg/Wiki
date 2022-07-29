@@ -1,15 +1,12 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}Wiki - Les Produits{% endblock %}
 
 {% block body %}
     {% include "/customer/shared/_messages_flash.html.twig" %}
    <div class="container py-5">
         <div class="row">
             {% include "admin/shared/_messages_flash.html.twig" %}
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-            </div>
             <div class="col-12 mb-3">
                 <div class="card">
                     <div class="card-header">

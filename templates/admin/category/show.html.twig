@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Wiki - Categorie {{ category.name }} {% endblock %}
 
 {% block body %}
     {% include "/customer/shared/_messages_flash.html.twig" %}
@@ -8,9 +8,9 @@
         <div class="row">
             <div class="container">
                 <div class="row">
-                    <div class="col">
+                    {# <div class="col">
                 <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-                    </div>
+                    </div> #}
                     <h3 class="col text-center">
                         {{ category.name | upper }}
                     </h3>

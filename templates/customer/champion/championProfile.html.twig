@@ -1,6 +1,6 @@
 {% extends 'customer/base.html.twig' %}
 
-{% block title %}Hello CustomerchampionController!{% endblock %}
+{% block title %}Wiki - {{ champion.name | capitalize }} {% endblock %}
 
 {% block body %}
   
@@ -8,9 +8,6 @@
 
     <div class="container py-5">
         <div class="row">
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-            </div>
             <div class="col-6">
                 <div class="card">
                     <img src="{{ champion.mainImage }}" alt="produit" class="imagechampionDetail">
@@ -23,19 +20,27 @@
                     </div>
                     <div class="card-body">
                         <img src="{{ champion.icon }}" alt="champion icon">
-                        <p>Prix : {{ champion.price | BEFormatEuro }} </p>
-                        <p>Titre: {{ champion.title }}</p>
-                        <p>Resumer: </br>{{ champion.blurb }}</p>
-                        <p>Tags:</p>
-                         {% for tag in champion.tags %}
-                            <pre>{{ tag }}</pre>
-                        {% endfor %}
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary w-100">Ajouter au panier</a>
+                        <p><span style="font-weight: bold;">Prix :</span> {{ champion.price | BEFormatEuro }} </p>
+                        <p><span style="font-weight: bold;">Titre:</p></span>
+                        <p> {{ champion.title }}</p>
+                        <p><span style="font-weight: bold;">Resumer:</p></span>
+                        <p>{{ champion.blurb }}</p>
+                        <p><span style="font-weight: bold;">Tags:</p></span>
+                        <p class="mt-n1">
+                            {% for tag in champion.tags %}
+                                {{ tag }}
+                            {% endfor %}
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div style="background-color: rgb(33,37,41);">
+        {% for spell in champion.spells %}
+            <h5 class="ms-4 pt-4" style="color: white;">{{ spell.name }}</h5>
+            <img src="{{ spell.spellImage }}" alt="spellImage: {{ spell.name }}" class="spell-Icon ms-4 pt-2" style="border-radius: 50%;">
+            <p class="ps-4 pt-2" style="color: white;">{{ spell.resume }}<p>
+        {% endfor %}
     </div>
 {% endblock %}

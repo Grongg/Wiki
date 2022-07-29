@@ -1,14 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %} Wiki - {{ product.name }} {% endblock %}
 
 {% block body %}
     {% include "/customer/shared/_messages_flash.html.twig" %}
     <div class="container py-5">
         <div class="row">
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-            </div>
             <div class="col-6">
                 <div class="card">
                     <img src="{{ product.image }}" alt="produit" class="imageProductDetail">

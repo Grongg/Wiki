@@ -154,3 +154,28 @@
     margin-right: 2%;
     width: 65%;
 }
+
+.pagination > li > a
+{
+    color: #17090F;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: black;
+}
+
+.pagination > .active > a
+{
+    color: black;
+}
+
+.active>.page-link
+{
+    color: black;
+    background-color: #d9e2ef;
+    border-color: black;
+}

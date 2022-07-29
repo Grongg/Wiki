@@ -48,10 +48,33 @@ class SuccessCommandShopController extends AbstractController
         }
     }
 
-    #[Route('/failedpayment', name: 'stripe_failed_payment')]
-    public function failed()
+    #[Route('/failedpayment/{id}', name: 'stripe_failed_payment')]
+    public function failed($id, EntityManagerInterface $em,
+                            CommandShopRepository $commandShopRepository,
+                            UserRepository $userRepository,
+                            Request $request,
+                            UserAuthenticatorInterface $ue,
+                            ChunAuthenticator $chun)
     {
         $this->addFlash("info", "Votre payment a echoue");
+        $user = $userRepository->find($id);
+
+        if ($user)
+        {
+            $commandShop = $commandShopRepository->findOneBy([
+                'user' => $user,
+                ], [
+                    'id' => 'DESC'
+            ]);
+
+            $commandShop->setIsPayed(true);
+            $em->flush();
+            $ue->authenticateUser(
+                $user,
+                $chun,
+                $request
+            );
+        }
         return $this->redirectToRoute("cart_detail");
     }
 }
