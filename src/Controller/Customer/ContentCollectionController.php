@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContentCollectionController extends AbstractController
 {
     #[Route('/collection', name: 'nonsigned_collection')]
-    public function index(ContentCollectionRepository $contentCollectionRepository, ChampionRepository $championRepository): Response
+    public function index(ChampionRepository $championRepository, EntityManagerInterface $em): Response
     {
         $champions = $championRepository->findAll();
         $champTab = [];
@@ -25,28 +25,55 @@ class ContentCollectionController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        dump($user);
+
         if ($user)
         {
             $contentCollection = $user->getContentCollection();
+            if (!$contentCollection)
+            {
+                $contentCollection = new ContentCollection();
+                $user->setContentCollection($contentCollection);
+                $em->persist($contentCollection);
+                $em->persist($user);
+                $em->flush();
+            }
 
             $championCollected = [];
 
-            foreach ($contentCollection->getSelectedChampions() as $champ)
+            if ($contentCollection)
             {
-                $championCollected[] = $champ->getChampion();
-            }
-
-            foreach ($champions as $item)
-            {
-                if (in_array($item, $championCollected))
-                {
-                    $data = [
-                        "isSelected" => true,
-                        "champion" => $item
-                    ];
-                    $champTab[] = $data;
+                if ($contentCollection->getSelectedChampions())
+                {   
+                    foreach ($contentCollection->getSelectedChampions() as $champ)
+                    {
+                        $championCollected[] = $champ->getChampion();
+                    }
+                    
+                    foreach ($champions as $item)
+                    {
+                        if (in_array($item, $championCollected))
+                        {
+                            $data = [
+                                "isSelected" => true,
+                                "champion" => $item
+                            ];
+                            $champTab[] = $data;
+                        }
+                        else
+                        {
+                            $data = [
+                                "isSelected" => false,
+                                "champion" => $item
+                            ];
+                            $champTab[] = $data;
+                        }
+                    }
                 }
-                else
+            }
+            else
+            {
+                foreach ($champions as $item)
                 {
                     $data = [
                         "isSelected" => false,
@@ -65,7 +92,7 @@ class ContentCollectionController extends AbstractController
                         "champion" => $item
                     ];
                     $champTab[] = $data;
-                }
+            }
         }
         return $this->render('customer/collection/index.html.twig', [
             'champions' => $champTab,
@@ -73,7 +100,9 @@ class ContentCollectionController extends AbstractController
     }
 
     #[Route('/toggle_collection/{id}', name: 'toggle_collection')]
-    public function toggleContentCollection($id, ChampionRepository $championRepository, EntityManagerInterface $em, SelectedChampionRepository $selectedChampionRepository)
+    public function toggleContentCollection($id, ChampionRepository $championRepository, 
+                                            EntityManagerInterface $em, 
+                                            SelectedChampionRepository $selectedChampionRepository)
     {
         $champion = $championRepository->find($id);
 
@@ -101,6 +130,7 @@ class ContentCollectionController extends AbstractController
           'contentCollection' => $contentCollection,
           'champion' => $champion
         ]);
+        // dd($selectedChampionClicked);
         if (!$selectedChampionClicked)
         {
             $selectedChampion = new SelectedChampion();
@@ -115,12 +145,37 @@ class ContentCollectionController extends AbstractController
         }
         else
         {
+            $user->setContentCollection($contentCollection);
+            $em->persist($user);
             $em->remove($selectedChampionClicked);
             $em->flush();
             return $this->json([
                 'code' => 200,
                 'message' => "Successfully removed"
             ], 200);
+        }
+    }
+
+    #[Route('/favorites', name: 'collection_favorites')]
+    public function collection_favorites(SelectedChampionRepository $selectedChampionRepository, 
+                                            ChampionRepository $championRepository) 
+    {
+        /** @var User $user */
+        $user = $this->getUser();        
+
+        if ($user)
+        {
+            $selected = $selectedChampionRepository->findAll();
+            $allChamps = $championRepository->findAll();
+            $champs = [];
+            foreach ($selected as $champion)
+            {
+                $champs[] = $championRepository->findOneBy(['id' => $champion->getChampion()->getId()]);
+            }
+            dump($champs);
+            return $this->render('customer/collection/favorites.html.twig', [
+                'champions' => $champs,
+            ]);
         }
     }
 }

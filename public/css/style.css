@@ -3,6 +3,11 @@
     position: relative
 }
 
+#logo {
+    height:100%; 
+    width:55%;
+}
+
 .form .fa-search {
     position: absolute;
     top: 10px;
@@ -96,38 +101,6 @@
     /* margin-left: 1em; */
 }
 
-@media screen and (min-width: 607px)
-{
-    #splash
-    {
-        width: 60%;
-        height: 10%;
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-    }
-}
-
-.splashImg
-{
-    width: 100%;
-}
-
-@media only screen and (min-width: 701px) and (max-width: 1080px)
-{
-    .splashImg
-    {
-        width: 138%;
-    }
-}
-
-@media only screen and (min-width: 480px) and (max-width: 700px)
-{
-    .splashImg
-    {
-        width: 140%;
-    }
-}
-
 #spells 
 {
     max-height: 100%;
@@ -173,9 +146,110 @@
     color: black;
 }
 
+.page-link 
+{
+    font-size: 16px;
+}
+
 .active>.page-link
 {
     color: black;
     background-color: #d9e2ef;
     border-color: black;
+}
+
+.splashImg
+{
+    width: 100%;
+}
+
+@media screen and (min-width: 607px)
+{
+    #splash
+    {
+        width: 60%;
+        height: 10%;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+/* TV, xtra large screen */
+@media only screen and (min-width: 1200px)
+{
+
+}
+
+/* Large Screen */
+@media only screen and (min-width: 1025px) and (max-width: 1200px)
+{
+
+}
+
+/* laptop */
+@media only screen and (min-width: 769px) and (max-width: 1024px)
+{
+
+}
+
+
+/* tablette */
+@media only screen and (min-width: 481px) and (max-width: 768px)
+{
+    .splashImg
+    {
+        width: 138%;
+    }
+
+    #logo {
+        height: 35%;
+        width: 35%;
+    }
+
+}
+
+@media screen and (max-width: 469px) 
+{
+    .page-link
+    {
+        font-size: 12px;
+    }
+}
+
+/* mobile */
+@media only screen and (min-width: 320px) and (max-width: 480px)
+{
+    #splash
+    {
+        padding: 0;
+        /* margin-left: -128px; */
+        margin-top: 19px;
+
+    }
+
+    .splashImg
+    {
+        width: 100%;
+    }
+
+    #logo {
+        height: 100%;
+        width: 190%;
+    }
+
+    .navbar-toggler
+    {
+        width: 15%;
+        height: 5%;
+    }
+
+    .navbar-brand
+    {
+        width: 18%;
+    }
+
+    .navbar-toggler-icon
+    {
+        width: 100%;
+    }
 }

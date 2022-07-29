@@ -1,18 +1,18 @@
 {% extends 'customer/base.html.twig' %}
 
-{% block title %}Wiki - Les champions{% endblock %}
+{% block title %}Wiki - Les champions {% endblock %}
 
 {% block body %}
-<div class="container py-5">
+<div class="container py-lg-5 py-4">
     <div class="row">
-        <div class="col-12 pb-5">
+        <div class="col-12 pb-lg-5 pb-3">
             <h3 class="text-center">Les Champions</h3>
         </div>
-        <div class="navigation d-flex justify-content-center" id="pagination">
+        <div class="navigation d-flex justify-content-center p-1" id="pagination">
             {{ knp_pagination_render(champions) }}
         </div>
         {% for champion in champions %}
-            <div class="col-4">
+            <div class="col-6 col-lg-4 p-1">
                 <div class="card">
                     <div class="card-header">
                         <h5>{{ champion.name }}</h5>
@@ -26,7 +26,7 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="navigation mt-4 d-flex justify-content-center">
+        <div class="navigation mt-4 d-flex justify-content-center p-1">
             {{ knp_pagination_render(champions) }}
         </div>
     </div>

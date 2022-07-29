@@ -15,7 +15,7 @@ class StripeController extends AbstractController
     #[Route('/stripe/checkout', name: 'stripe_checkout')]
     public function createSession(CartService $cartService)
     {
-        Stripe::setApiKey('sk_test_51KWHxdA3HlYGRcWziBfVrJHOixZH1xsccLGqg3q7QIlRcIqYlP7AwJt62AUWvA8lJIPh9rGOqmVMafiOf8sHFEFu00hkPeKtdT');
+        Stripe::setApiKey(file_get_contents("../../../.token"));
 
         $domain = 'http://localhost:8000/';
 
@@ -52,7 +52,7 @@ class StripeController extends AbstractController
             ],
             'mode' => 'payment',
             'success_url' => $domain . 'successfullpayment/' . $user->getId(),
-            'cancel_url' => $domain . 'failedpayment' . $user->getId(),
+            'cancel_url' => $domain . 'failedpayment/' . $user->getId(),
         ]);
 
         return $this->redirect($checkout_session->url);

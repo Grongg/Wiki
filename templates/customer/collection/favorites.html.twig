@@ -1,0 +1,32 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %} Wiki - Your Selected Champs {% endblock %}
+
+{% block body %}
+    {% include "/customer/shared/_messages_flash.html.twig" %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 pb-5">
+                <h3 class="text-center">Les Favoris</h3>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    {% if champions  is empty %}
+                        <div class="col-12">
+                            <h5 class="text-center text-danger">Vous n'avez pas selectionné de champions en favori</h5>
+                        </div>
+                    {% else %}
+                        {% for champ in champions %}
+                            <div class="col-sm-6 col-md-3 mt-2">
+                                <img src="{{ champ.icon }}" alt="{{ champ.name }} icon" class="collection imageChampion" data-champ="{{ champ.id }}" style="border-color: gold; filter: brightness(100%); -webkit-box-shadow: 0px 0px 5px 1px gold; box-shadow: 0px 0px 5px 1px gold;">
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="col-12 d-flex justify-content-center mt-5">
+                        <a href="{{ path("nonsigned_collection") }}" type="button" class="btn btn-secondary ">Revenir à la collection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

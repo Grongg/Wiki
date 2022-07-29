@@ -1,46 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <div class="container " style="height:40%; width:40%;">
-      <a class="navbar-brand" href="{{ path('customer_home') }}">
-        <img src="https://cdn.discordapp.com/attachments/199640883971358720/998273203795394661/logo_test.png" alt="logo" style="height:25%; width:25%;">
-      </a>
-    </div>
-    <div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('nonsigned_collection') }}">Collection Tracker</a>
+    <a class="navbar-brand" href="{{ path('customer_home') }}">
+      <img src="https://cdn.discordapp.com/attachments/199640883971358720/1002590477503168643/logo_test.png" alt="logo" id="logo">
+    </a>
+    <button class="navbar-toggler d-flex justify-content-center align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('nonsigned_collection') }}">Collection Tracker</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('customer_champion_index') }}">Champions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
+        </li>
+        {% if app.user %}
+          <li class="nav-item dropdown">
+            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link active dropdown-toggle" id="navbarDropdownMenuLink">Mon Compte</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a href="{{ path('customer_profile', {'id': app.user.id }) }}" class="dropdown-item">Mon Profil</a></li>
+              <li><a href="{{ path('cart_detail') }}" class="dropdown-item">Voir le Panier</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('customer_champion_index') }}">Champions</a>
+            <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+              <a class="nav-link active" href="{{ path('app_login') }}">Se Connecter</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
+                  <a class="nav-link active" href="{{ path('app_register') }}">S'inscrire</a>
           </li>
-          {% if app.user %}
-            <li class="nav-item dropdown">
-              <a href="#" role="button" data-bs-toggle="dropdown" class="nav-link active dropdown-toggle" id="navbarDropdown">Mon Compte</a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a href="{{ path('customer_profile', {'id': app.user.id }) }}" class="dropdown-item">Mon Profil</a></li>
-                <li><a href="{{ path('cart_detail') }}" class="dropdown-item">Voir le Panier</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>
-            </li>
-          {% else %}
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ path('app_login') }}">Se Connecter</a>
-            </li>
-            <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('app_register') }}">S'inscrire</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
+        {% endif %}
+      </ul>
     </div>
   </div>
 </nav>
