@@ -6,41 +6,49 @@
   
     {% include "/customer/shared/_messages_flash.html.twig" %}
 
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-6">
-                <div class="card">
-                    <img src="{{ champion.mainImage }}" alt="produit" class="imagechampionDetail">
+    <div class="ms-lg-0 py-5 " style="margin-right: 30px;">
+        <div class="d-flex justify-content-center">
+            <div class="col-6 d-none d-lg-block">
+                <div class="w-100 h-100 d-flex justify-content-end">
+                    <img src="{{ champion.mainImage }}" alt="produit" class="h-100 me-lg-4">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6 d-flex justify-content-end">
                 <div class="card">
                     <div class="card-header">
                         <h3>{{ champion.name | upper }}</h3>
                     </div>
-                    <div class="card-body">
-                        <img src="{{ champion.icon }}" alt="champion icon">
-                        <p><span style="font-weight: bold;">Prix :</span> {{ champion.price | BEFormatEuro }} </p>
-                        <p><span style="font-weight: bold;">Titre:</p></span>
-                        <p> {{ champion.title }}</p>
-                        <p><span style="font-weight: bold;">Resumer:</p></span>
-                        <p>{{ champion.blurb }}</p>
-                        <p><span style="font-weight: bold;">Tags:</p></span>
-                        <p class="mt-n1">
-                            {% for tag in champion.tags %}
-                                {{ tag }}
-                            {% endfor %}
-                        </p>
+                    <div class="card-body d-flex flex-column flex-md-row d-lg-block">
+                        <img src="{{ champion.mainImage }}" alt="produit" class="imagechampionDetail d-lg-none px-4 px-sm-0">
+                        <div class="ms-0 ms-sm-3 ms-lg-0 px-2 px-lg-0 pt-3 pt-sm-0 d-flex justify-content-center flex-column">
+                            <p class="championDetailsParagraph"><span class="championDetails">Prix :</span> {{ champion.price | BEFormatEuro }} </p>
+                            <p><span class="championDetails">Titre:</p></span>
+                            <p class="championDetailsParagraph"> {{ champion.title }}</p>
+                            <p><span class="championDetails">Resumer:</p></span>
+                            <p class="championDetailsParagraph">{{ champion.blurb }}</p>
+                            <p><span class="championDetails">Tags:</p></span>
+                            <p class="mt-n1 championDetailsParagraph">
+                                {% for tag in champion.tags %}
+                                    {{ tag }}
+                                {% endfor %}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div style="background-color: rgb(33,37,41);">
-        {% for spell in champion.spells %}
-            <h5 class="ms-4 pt-4" style="color: white;">{{ spell.name }}</h5>
-            <img src="{{ spell.spellImage }}" alt="spellImage: {{ spell.name }}" class="spell-Icon ms-4 pt-2" style="border-radius: 50%;">
-            <p class="ps-4 pt-2" style="color: white;">{{ spell.resume }}<p>
-        {% endfor %}
+        <div class="">
+            <div class="row justify-content-center align-items-center">
+                {% for spell in champion.spells %}
+                    <div class="card col-10 col-md-6 col-lg-4 col-xl-4 border border-radius-2 d-flex align-items-center justify-content-between px-4 py-2 mt-4 bg-transparent spell-box" style="width: 33vw; height: 40vh">
+                        <h5 class="" style="color: white;">{{ spell.name }}</h5>
+                        <img src="{{ spell.spellImage }}" alt="spellImage: {{ spell.name }}" class="spell-Icon pt-2">
+                        <p class="text-start mt-2" style="color: white;">{{ spell.resume }}<p>
+                    </div>
+                {% endfor %}>
+            </div>
+        </div>
     </div>
 {% endblock %}

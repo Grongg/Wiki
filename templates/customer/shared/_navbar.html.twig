@@ -1,41 +1,28 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('customer_home') }}">
-      <img src="https://cdn.discordapp.com/attachments/199640883971358720/1002590477503168643/logo_test.png" alt="logo" id="logo">
+    <a class="navbar-brand" href="#" style="width: 24%">
+      <img src="https://cdn.discordapp.com/attachments/199640883971358720/1002590477503168643/logo_test.png" alt="logo" id="logo" width="70%">
     </a>
-    <button class="navbar-toggler d-flex justify-content-center align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('nonsigned_collection') }}">Collection Tracker</a>
+          <a class="nav-link active" aria-current="page" href="#">Collection</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('customer_champion_index') }}">Champions</a>
+          <a class="nav-link active" href="{{ path("customer_champion_index") }}">Champions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('contact') }}">Prendre Contact</a>
+          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Se Deconnecter</a>
         </li>
-        {% if app.user %}
-          <li class="nav-item dropdown">
-            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link active dropdown-toggle" id="navbarDropdownMenuLink">Mon Compte</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a href="{{ path('customer_profile', {'id': app.user.id }) }}" class="dropdown-item">Mon Profil</a></li>
-              <li><a href="{{ path('cart_detail') }}" class="dropdown-item">Voir le Panier</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ path('app_logout') }}">Se Déconnecter</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-              <a class="nav-link active" href="{{ path('app_login') }}">Se Connecter</a>
-          </li>
-          <li class="nav-item">
-                  <a class="nav-link active" href="{{ path('app_register') }}">S'inscrire</a>
-          </li>
-        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Mon panier</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Mon Compte</a>
+        </li>
       </ul>
     </div>
   </div>
