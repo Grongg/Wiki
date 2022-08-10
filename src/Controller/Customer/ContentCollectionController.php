@@ -9,18 +9,21 @@ use App\Repository\ChampionRepository;
 use App\Repository\ContentCollectionRepository;
 use App\Repository\SelectedChampionRepository;
 use App\Services\ContentCollectionService;
+use App\Services\CookieService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ContentCollectionController extends AbstractController
 {
     #[Route('/collection', name: 'nonsigned_collection')]
-    public function index(ChampionRepository $championRepository, EntityManagerInterface $em): Response
+    public function index(ChampionRepository $championRepository, EntityManagerInterface $em, CookieService $cookieService, Request $request): Response
     {
         $champions = $championRepository->findAll();
         $champTab = [];
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
 
         /** @var User $user */
         $user = $this->getUser();
@@ -96,6 +99,7 @@ class ContentCollectionController extends AbstractController
         }
         return $this->render('customer/collection/index.html.twig', [
             'champions' => $champTab,
+            'session' => $session
         ]);
     }
 
@@ -158,15 +162,15 @@ class ContentCollectionController extends AbstractController
 
     #[Route('/favorites', name: 'collection_favorites')]
     public function collection_favorites(SelectedChampionRepository $selectedChampionRepository, 
-                                            ChampionRepository $championRepository) 
+    ChampionRepository $championRepository, CookieService $cookieService, Request $request) 
     {
         /** @var User $user */
         $user = $this->getUser();        
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
 
         if ($user)
         {
             $selected = $selectedChampionRepository->findAll();
-            $allChamps = $championRepository->findAll();
             $champs = [];
             foreach ($selected as $champion)
             {
@@ -175,6 +179,7 @@ class ContentCollectionController extends AbstractController
             dump($champs);
             return $this->render('customer/collection/favorites.html.twig', [
                 'champions' => $champs,
+                'session' => $session
             ]);
         }
     }

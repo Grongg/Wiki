@@ -56,7 +56,7 @@ class SuccessCommandShopController extends AbstractController
                             UserAuthenticatorInterface $ue,
                             ChunAuthenticator $chun)
     {
-        $this->addFlash("info", "Votre payment a echoue");
+        // $this->addFlash("info", "Votre payment a echoue");
         $user = $userRepository->find($id);
 
         if ($user)
@@ -74,6 +74,7 @@ class SuccessCommandShopController extends AbstractController
                 $chun,
                 $request
             );
+            return $this->redirectToRoute('payment_failed_page');
         }
         return $this->redirectToRoute("cart_detail");
     }

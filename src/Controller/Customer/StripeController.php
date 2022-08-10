@@ -2,20 +2,23 @@
 
 namespace App\Controller\Customer;
 
-use App\Entity\User;
 use Stripe\Stripe;
+use App\Entity\User;
+use DirectoryIterator;
 use Stripe\Checkout\Session;
 use App\Services\CartService;
+use App\Services\CookieService;
 use App\Services\CartRealProduct;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StripeController extends AbstractController
 {
     #[Route('/stripe/checkout', name: 'stripe_checkout')]
-    public function createSession(CartService $cartService)
+    public function createSession(CartService $cartService, CookieService $cookieService, Request $request)
     {
-        Stripe::setApiKey(file_get_contents("../../../.token"));
+        Stripe::setApiKey(file_get_contents(".token"));
 
         $domain = 'http://localhost:8000/';
 

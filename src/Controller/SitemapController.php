@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
+use App\Services\CookieService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,8 +14,9 @@ class SitemapController extends AbstractController
 /**
  * @Route("sitemap/sitemap.xml", name="sitemap", defaults={"_format"="xml"})
  */
-    public function index(Request $request, ProductRepository $productRepository)
+    public function index(Request $request, ProductRepository $productRepository, CookieService $cookieService)
     {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         // Nous récupérons le nom d'hôte depuis l'URL
         $hostname = $request->getSchemeAndHttpHost();
 
@@ -45,7 +47,7 @@ class SitemapController extends AbstractController
         // Fabrication de la réponse XML
         $response = new Response(
             $this->renderView('sitemap/sitemap.html.twig', ['urls' => $urls,
-                'hostname' => $hostname]),
+                'hostname' => $hostname, 'session' => $session]),
             200
         );
 

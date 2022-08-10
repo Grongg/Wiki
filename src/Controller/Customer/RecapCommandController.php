@@ -8,6 +8,7 @@ use App\Entity\DeliveryAddress;
 use App\Entity\User;
 use App\Form\DeliveryAddressType;
 use App\Services\CartService;
+use App\Services\CookieService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecapCommandController extends AbstractController
 {
     #[Route('/command/recap', name: 'command_recap')]
-    public function recap(Request $request, EntityManagerInterface $em, CartService $cartService)
+    public function recap(Request $request, EntityManagerInterface $em, CartService $cartService, CookieService $cookieService)
     {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         $deliveryAddress = new DeliveryAddress();
         $form = $this->createForm(DeliveryAddressType::class, $deliveryAddress);
         $form->handleRequest($request);
@@ -54,6 +56,7 @@ class RecapCommandController extends AbstractController
             'form' => $form->createView(),
             'cart' => $cart,
             'totalCart' => $totalCart,
+            'session' => $session
         ]);
     }
 }

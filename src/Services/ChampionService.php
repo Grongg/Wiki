@@ -37,8 +37,6 @@ class ChampionService
                 {
                     $entityManager->persist($champion);
                     $entityManager->flush();
-                    // if($champion->getName() == "nidalee")
-                    //     dd($champion);
                 }
             }
         }

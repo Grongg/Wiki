@@ -4,6 +4,7 @@ namespace App\Controller\Customer;
 
 use App\Services\CartService;
 use App\Repository\ProductRepository;
+use App\Services\CookieService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ class CartController extends AbstractController
 
     #[Route('/cart/add/{id}', name: 'cart_add')]
     public function add(int $id, ProductRepository $productRepository,
-                                Request $request)
+                                Request $request, CookieService $cookieService)
     {
         $product = $productRepository->find($id);
 
@@ -41,7 +42,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/delete/{id}', name: 'cart_remove')]
-    public function delete(int $id, ProductRepository $productRepository)
+    public function delete(int $id, ProductRepository $productRepository, CookieService $cookieService)
     {
         $product = $productRepository->find($id);
 
@@ -58,8 +59,9 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/detail', name: 'cart_detail')]
-    public function detail()
+    public function detail(CookieService $cookieService, Request $request)
     {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         $cart = $this->cartService->detail();
 
         $totalCart = $this->cartService->getTotal();
@@ -68,12 +70,13 @@ class CartController extends AbstractController
 
         return $this->render("customer/cart/detail.html.twig",[
             'cart' => $cart,
-            'totalCart' => $totalCart
+            'totalCart' => $totalCart,
+            'session' => $session
         ]);
     }
 
     #[Route('/cart/decrement/{id}', name: 'cart_decrement')]
-    public function decrementProduct(int $id, ProductRepository $productRepository)
+    public function decrementProduct(int $id, ProductRepository $productRepository, CookieService $cookieService)
     {
         $product = $productRepository->find($id);
 

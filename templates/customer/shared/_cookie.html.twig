@@ -1,0 +1,17 @@
+<div id="degage"
+{% if session.get('cookiesNoRepeat') is same as false %}
+     style="display: block"
+{% else %}
+     style="display: none"
+{% endif %}
+     class="alert alert-dismissible fade show bg-dark text-white position-fixed start-0 bottom-0 z-index-9 shadow rounded p-4 ms-3 mb-3 col-9 col-md-3 mb-2">
+        This website stores cookies on your computer. To find out more about the cookies we use, see our <a class="text-danger" href="#"> Privacy Policy</a>
+    <div class="mt-4">
+        <button type="button" id="cookieYes" class="btn btn-secondary btn-sm text-white mb-0" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">Accepter</span>
+        </button>
+        <button type="button" id="cookieNo" class="btn btn-danger btn-sm text-white mb-0" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">Refuser</span>
+        </button>
+    </div>
+</div>

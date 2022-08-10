@@ -3,6 +3,7 @@
 namespace App\Controller\Customer;
 
 use App\Form\EditPasswordType;
+use App\Services\CookieService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +16,13 @@ class CustomerAccountController extends AbstractController
 {
     #[Route('/customer/account/updatepassword', name: 'customer_account_edit_password')]
     public function editPassword(Request $request, EntityManagerInterface $em,
-                                UserPasswordHasherInterface $userPasswordHasher)
+                                UserPasswordHasherInterface $userPasswordHasher, CookieService $cookieService)
     {
         /** @var User $user */
         $user = $this->getUser();
         $form = $this->createForm(EditPasswordType::class);
         $form->handleRequest($request);
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
@@ -37,6 +39,7 @@ class CustomerAccountController extends AbstractController
 
         return $this->render('customer/account/edit_password.html.twig', [
             'editForm' => $form->createView(),
+            'session' => $session
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\Customer;
 
 use App\Form\EditProfileFormType;
 use App\Repository\UserRepository;
+use App\Services\CookieService;
 use App\Services\HandleImage;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,20 +15,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/profile/{id}', name: 'customer_profile')]
-    public function index() : Response
+    public function index(CookieService $cookieService, Request $request) : Response
     {
-
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         /** @var User $user */
         $user = $this->getUser();
 
         return $this->render('customer/profile/index.html.twig', [
             "commands" => $user->getCommandShops(),
+            'session' => $session
         ]);
     }
 
     #[Route('/profile/{id}/edit', name: 'customer_edit_profile')]
-    public function edit($id, Request $request, EntityManagerInterface $em, HandleImage $handleImage, UserRepository $userRepository) : Response
+    public function edit($id, Request $request, EntityManagerInterface $em, HandleImage $handleImage, UserRepository $userRepository,
+    CookieService $cookieService) : Response
     {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         $user = $userRepository->find($id);
         $form = $this->createForm(EditProfileFormType::class, $user);
         $form->handleRequest($request);
@@ -40,6 +44,7 @@ class ProfileController extends AbstractController
         return $this->renderForm('customer/profile/edit.html.twig', [
             'user' => $user,
             'EditProfileForm' => $form,
+            'session' => $session
         ]);
     }
 

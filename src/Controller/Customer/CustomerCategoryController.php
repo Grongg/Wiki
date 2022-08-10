@@ -2,7 +2,9 @@
 
 namespace App\Controller\Customer;
 
+use App\Services\CookieService;
 use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,15 +12,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CustomerCategoryController extends AbstractController
 {
     #[Route('/customer/category/{id}', name: 'customer_category')]
-    public function showCategory($id, CategoryRepository $categoryRepository): Response
+    public function showCategory($id, CategoryRepository $categoryRepository, CookieService $cookieService, Request $request): Response
     {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         $category = $categoryRepository->find($id);
 
         if (!$category)
             return $this->redirectToRoute("customer_home");
 
         return $this->render('customer/customer_category/category.html.twig', [ 
-                'category' => $category
+                'category' => $category,
+                'session' => $session
         ]);
     }
 }

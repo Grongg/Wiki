@@ -1,11 +1,11 @@
 {% extends 'customer/base.html.twig' %}
 
-{% block title %}Wiki - Merci de votre achat !{% endblock %}
+{% block title %}Wiki - Erreur de Paiement!{% endblock %}
 
 {% block body %}
     <div class="container py-5">
         <div class="col-12 flex-column d-flex justify-content-center align-items-center">
-            <h1 class="text-center">Merci de votre achat</h1>
+            <h1 class="text-center">Il y a eu une erreur lors du paiement, veuillez réessayer ultérieurement.</h1>
             <div class="col-4 d-flex justify-content-center align-items-center">
                 <a class="btn btn-secondary mt-5 d-flex align-items-center justify-content-center" href="{{ path("customer_home") }}">Revenir vers la page d'accueil</a>
             </div>

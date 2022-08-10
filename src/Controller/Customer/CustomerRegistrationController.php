@@ -6,6 +6,7 @@ use App\Entity\ContentCollection;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\ChunAuthenticator;
+use App\Services\CookieService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,14 +18,20 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class CustomerRegistrationController extends AbstractController
 {
     #[Route('/customer/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, ChunAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, ChunAuthenticator $authenticator, EntityManagerInterface $entityManager,
+    CookieService $cookieService): Response
     {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+            if ($form["agreeTerms"]->getData() === true)
+            {
+                $user->agreeTerms();
+            }
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
@@ -48,6 +55,7 @@ class CustomerRegistrationController extends AbstractController
 
         return $this->render('customer/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'session' => $session
         ]);
     }
 }

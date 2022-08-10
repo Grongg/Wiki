@@ -18,10 +18,13 @@
                         {{ form_row(registrationForm.file) }}
                         {{ form_row(registrationForm.plainPassword.first) }}                 
                         {{ form_row(registrationForm.plainPassword.second) }}
-                        {{ form_row(registrationForm.agreeTerms) }}
-                            <button type="submit" class="btn btn-primary mt-3">
-                                Valider
-                            </button>
+                        <div class="d-flex flex-column justify-content-start" id="CGU">
+                            {{ form_row(registrationForm.agreeTerms) }}
+                            <a href="{{ path("cgv") }}" class="ms-4 align-items-center text-decoration-none link-secondary" style="font-size: 13px;">Vers les CGU</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">
+                            Valider
+                        </button>
                     {{ form_end(registrationForm) }}
                 </div>
             </div>

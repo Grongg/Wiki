@@ -248,4 +248,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function agreeTerms()
+    {
+        $this->agreedTermsAt = new \DateTime();
+    }
+
 }
