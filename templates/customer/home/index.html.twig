@@ -1,225 +1,220 @@
 {% extends 'customer/base.html.twig' %}
 
-{% block title %}Wiki - Accueil{% endblock %}
+{% block title %}Wiki - Accueil
+{% endblock %}
 
 {% block body %}
-    {% include "/customer/shared/_messages_flash.html.twig" %}
-    <section>
-        <div class="row" style="width: 100%; height: 100%; margin: 0;">
-            <div class="container">
-                <div class=" row">
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false" style="padding: 0;">
-                        <div class="carousel-indicators" style="margin-right: 4em;">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner" style="height: 100%;">
-                            <div class="carousel-item active container" style="max-width:100%; width: 100%; height:100%;">
-                                <div class="row" style="height: 100%;">
-                                    <div id="splash" class="col-lg-6">
-                                        <div>
-                                            <a href="{{ path("customer_champion_show", {'id': previewChamps[0].id})}}">
-                                                <img src="{{ previewChamps[0].mainImage }}" class="splashImg" alt="">
-                                            </a>
-                                            <div class="carousel-caption d-none d-md-block" style="margin-right: 35em;">
-                                                <h5>{{ previewChamps[0].name }}</h5>
-                                                <p>{{ previewChamps[0].title }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="spells" class="col-lg-6 container d-flex flex-column" style="background-color: rgb(33,37,41);">
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; width: 100%; height:20%">
-                                            <p class="spell-Type">Sort passif</p>
-                                            <img src="{{ previewChamps[0].spells[0].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[0].spells[0].name }}</h6>
-                                                <p class="text-truncate" style="">{{ previewChamps[0].spells[0].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Premier sort</p>
-                                            <img src="{{ previewChamps[0].spells[1].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[0].spells[1].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[0].spells[1].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Deuxième sort</p>
-                                            <img src="{{ previewChamps[0].spells[2].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[0].spells[2].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[0].spells[2].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Troisième sort</p>
-                                            <img src="{{ previewChamps[0].spells[3].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[0].spells[3].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[0].spells[3].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Quatrième sort</p>
-                                            <img src="{{ previewChamps[0].spells[4].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[0].spells[4].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[0].spells[4].resume }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item container" style="max-width:100%; width: 100%; height:100%;">
-                                <div class="row" style="height: 100%;">
-                                    <div id="splash" class="col-lg-6">
-                                        <div>
-                                            <a href="{{ path("customer_champion_show", {'id': previewChamps[1].id})}}">
-                                                <img src="{{ previewChamps[1].mainImage }}" class="splashImg" alt="">
-                                            </a>
-                                            <div class="carousel-caption d-none d-md-block" style="margin-right: 35em;">
-                                                <h5>{{ previewChamps[1].name }}</h5>
-                                                <p>{{ previewChamps[1].title }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="spells" class="col-lg-6 container d-flex flex-column" style="background-color: rgb(33,37,41);">
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; width: 100%; height:20%">
-                                            <p class="spell-Type">Sort passif</p>
-                                            <img src="{{ previewChamps[1].spells[0].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[1].spells[0].name }}</h6>
-                                                <p class="text-truncate" style="">{{ previewChamps[1].spells[0].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Premier sort</p>
-                                            <img src="{{ previewChamps[1].spells[1].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[1].spells[1].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[1].spells[1].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Deuxième sort</p>
-                                            <img src="{{ previewChamps[1].spells[2].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[1].spells[2].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[1].spells[2].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Troisième sort</p>
-                                            <img src="{{ previewChamps[1].spells[3].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[1].spells[3].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[1].spells[3].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Quatrième sort</p>
-                                            <img src="{{ previewChamps[1].spells[4].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[1].spells[4].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[1].spells[4].resume }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item container" style="max-width:100%; width: 100%; height:100%;">
-                                <div class="row" style="height: 100%;">
-                                    <div id="splash" class="col-lg-6">
-                                        <div>
-                                            <a href="{{ path("customer_champion_show", {'id': previewChamps[2].id})}}">
-                                                <img src="{{ previewChamps[2].mainImage }}" class="splashImg" alt="">
-                                            </a>
-                                            <div class="carousel-caption d-none d-md-block" style="margin-right: 35em;">
-                                                <h5>{{ previewChamps[2].name }}</h5>
-                                                <p>{{ previewChamps[2].title }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="spells" class="col-lg-6 container d-flex flex-column" style="background-color: rgb(33,37,41);">
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; width: 100%; height:20%">
-                                            <p class="spell-Type">Sort passif</p>
-                                            <img src="{{ previewChamps[2].spells[0].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[2].spells[0].name }}</h6>
-                                                <p class="text-truncate" style="">{{ previewChamps[2].spells[0].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Premier sort</p>
-                                            <img src="{{ previewChamps[2].spells[1].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[2].spells[1].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[2].spells[1].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Deuxième sort</p>
-                                            <img src="{{ previewChamps[2].spells[2].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[2].spells[2].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[2].spells[2].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Troisième sort</p>
-                                            <img src="{{ previewChamps[2].spells[3].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[2].spells[3].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[2].spells[3].resume }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="container d-flex flex-row align-items-center" style="color: white; height:20%">
-                                            <p class="spell-Type">Quatrième sort</p>
-                                            <img src="{{ previewChamps[2].spells[4].spellImage }}" alt="" id="spellImage" class="spell-Icon">
-                                            <div class="spell-Text">
-                                                <h6>{{ previewChamps[2].spells[4].name }}</h6>
-                                                <p class="text-truncate" style="flex-grow: 1;">{{ previewChamps[2].spells[4].resume }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="pt-5 pb-5 d-flex justify-content-center" id="shop">
-            <h2 id="shop-text">Le Shop</h2>
-        </div>
-        {% for category in categories %}
-            <div class="row" id="section">
-                <h5 class="pt-5 pb-3 ps-5"  id="section-text">{{category.name}}</h5>
-                <div class="container ps-5 pt-2">
-                    <div class="row" id="category">
-                    {% for product in category.products | slice(0, 6)  %}
-                        <div class="col-md-auto col-lg-auto col-sg-auto pb-5 col-xl-auto col-xs-auto"  id="card">
-                            <div class="card object-fit-content" style="height: 8em; max-width: 13em; width: auto; border: none;">
-                                <a href="{{ path("customer_product", {'id': product.id}) }}">
-                                    <img src="{{ product.image }}" class="card-img-top" alt="{{product.name}}" id="pdt-img">
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-sg-12 col-xl-12 col-xs-12 ps-5 pb-4">
-                    <a class="ms-1 btn btn-secondary" href="{{ path("customer_category", { 'id' : category.id }) }}">View More ...</a>
-                </div>
-            </div>
-        {% endfor %}
-    </section>
+	{% include "/customer/shared/_messages_flash.html.twig" %}
+	<div class="">
+		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+			<div class="carousel-indicators me-lg-0">
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="row">
+						<div id="splash" class="col-lg-8 px-0">
+							<div>
+								<a href="{{ path("customer_champion_show", {'id': previewChamps[0].id})}}">
+									<img src="{{ previewChamps[0].mainImage }}" class="splashImg img-fluid" alt="">
+								</a>
+								<div class="carousel-caption d-none d-md-block">
+									<h5>{{ previewChamps[0].name }}</h5>
+									<p>{{ previewChamps[0].title }}</p>
+								</div>
+							</div>
+						</div>
+						<div id="spells" class="col-lg-4 container d-flex flex-column justify-content-evenly" style="background-color: rgb(33,37,41);">
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Sort passif</p>
+								<img src="{{ previewChamps[0].spells[0].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[0].spells[0].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[0].spells[0].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Premier sort</p>
+								<img src="{{ previewChamps[0].spells[1].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[0].spells[1].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[0].spells[1].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Deuxième sort</p>
+								<img src="{{ previewChamps[0].spells[2].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[0].spells[2].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[0].spells[2].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Troisième sort</p>
+								<img src="{{ previewChamps[0].spells[3].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[0].spells[3].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[0].spells[3].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Quatrième sort</p>
+								<img src="{{ previewChamps[0].spells[4].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[0].spells[4].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[0].spells[4].resume }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="carousel-item">
+					<div class="row">
+						<div id="splash" class="col-lg-8 px-0">
+							<div>
+								<a href="{{ path("customer_champion_show", {'id': previewChamps[1].id})}}">
+									<img src="{{ previewChamps[1].mainImage }}" class="splashImg img-fluid" alt="">
+								</a>
+								<div class="carousel-caption d-none d-md-block">
+									<h5>{{ previewChamps[1].name }}</h5>
+									<p>{{ previewChamps[1].title }}</p>
+								</div>
+							</div>
+						</div>
+						<div id="spells" class="col-lg-4 container d-flex flex-column justify-content-evenly" style="background-color: rgb(33,37,41);">
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Sort passif</p>
+								<img src="{{ previewChamps[1].spells[0].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[1].spells[0].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[1].spells[0].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Premier sort</p>
+								<img src="{{ previewChamps[1].spells[1].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[1].spells[1].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[1].spells[1].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Deuxième sort</p>
+								<img src="{{ previewChamps[1].spells[2].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[1].spells[2].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[1].spells[2].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Troisième sort</p>
+								<img src="{{ previewChamps[1].spells[3].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[1].spells[3].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[1].spells[3].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Quatrième sort</p>
+								<img src="{{ previewChamps[1].spells[4].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[1].spells[4].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[1].spells[4].resume }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="carousel-item">
+					<div class="row">
+						<div id="splash" class="col-lg-8 px-0">
+							<div>
+								<a href="{{ path("customer_champion_show", {'id': previewChamps[2].id})}}">
+									<img src="{{ previewChamps[2].mainImage }}" class="splashImg img-fluid" alt="">
+								</a>
+								<div class="carousel-caption d-none d-md-block">
+									<h5>{{ previewChamps[2].name }}</h5>
+									<p>{{ previewChamps[2].title }}</p>
+								</div>
+							</div>
+						</div>
+						<div id="spells" class="col-lg-4 container d-flex flex-column justify-content-evenly" style="background-color: rgb(33,37,41);">
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Sort passif</p>
+								<img src="{{ previewChamps[2].spells[0].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[2].spells[0].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[2].spells[0].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Premier sort</p>
+								<img src="{{ previewChamps[2].spells[1].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[2].spells[1].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[2].spells[1].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Deuxième sort</p>
+								<img src="{{ previewChamps[2].spells[2].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[2].spells[2].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[2].spells[2].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Troisième sort</p>
+								<img src="{{ previewChamps[2].spells[3].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[2].spells[3].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[2].spells[3].resume }}</p>
+								</div>
+							</div>
+							<div class="p-3 px-lg-2 d-flex flex-row align-items-center justify-content-md-center" style="color: white;">
+								<p class="spell-Type col-3 col-md-2 col-lg-3">Quatrième sort</p>
+								<img src="{{ previewChamps[2].spells[4].spellImage }}" alt="" id="spellImage" class="spell-Icon col-2">
+								<div class="spell-Text col-6">
+									<h6>{{ previewChamps[2].spells[4].name }}</h6>
+									<p class="text-truncate">{{ previewChamps[2].spells[4].resume }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="pt-5 pb-5 d-flex justify-content-center" id="shop">
+			<h2 id="shop-text">Le Shop</h2>
+		</div>
+		{% for category in categories %}
+			<div id="section">
+				<h5 class="pt-5 pb-3 ps-5" id="section-text">{{category.name}}</h5>
+				<div class="container ps-5 pt-2">
+					<div class="row" id="category">
+						{% for product in category.products | slice(0, 6)  %}
+							<div class="col-auto pb-5" id="card">
+								<div class="card object-fit-content" style="height: 8em; max-width: 13em; width: auto;">
+									<a href="{{ path("customer_product", {'id': product.id}) }}">
+										<img src="{{ product.image }}" class="card-img-top" alt="{{product.name}}" id="pdt-img">
+									</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12 col-sg-12 col-xl-12 col-xs-12 ps-5 pb-4">
+					<a class="ms-1 btn btn-secondary" href="{{ path("customer_category", { 'id' : category.id }) }}">View More ...</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="../../js/homeSections.js" type="text/javascript"></script>
+	<script src="../../js/homeSections.js" type="text/javascript"></script>
 {% endblock %}

@@ -94,15 +94,19 @@
 #spellImage
 {
     border-radius: 50%;
+    /* height: 4em;
+    width: 4em; */
     object-fit: cover;
+    /* margin-left: 1em; */
 }
 
 #spells 
 {
+    max-height: 100%;
     padding-right: 0 !important;
     padding-left: 0 !important;
 }
-	
+
 #spells > div > p
 {
     margin-bottom: 0px;
@@ -110,13 +114,11 @@
 
 .spell-Type
 {
-    /* width: 20%; */
     text-align: center;
 }
 
 .spell-Icon
 {
-    /* width: 20%; */
     border-radius: 50%;
 }
 
@@ -129,7 +131,6 @@
 {
     margin-left: 3%;
     margin-right: 2%;
-    /* width: 65%; */
 }
 
 .spell-Text > p 
@@ -177,69 +178,10 @@
     font-size: 16px;
 }
 
-#CGU > div
-{
-    margin-bottom: 0px !important;
-}
-
-.logo-footer
-{
-    width: 20%;
-}
-
-.page-container
-{
-    position: relative;
-    min-height: 100vh;
-}
-.content
-{
-    padding-bottom: 17rem;
-}
-
-footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 17rem;
-}
 
 /* Mobile S */
 @media screen and (max-width: 321px) 
 {
-    .content
-    {
-        padding-bottom: 40rem;
-    }
-
-    footer
-    {
-        height: 40rem;
-    }
-
-    .minus
-    {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .plus
-    {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .qty
-    {
-        padding: 0.2em;
-    }
-
     .page-link
     {
         font-size: 6.5px;
@@ -258,20 +200,9 @@ footer{
 
     .carousel-indicators
     {
-        /* right: -60px; */
-        bottom: 405px;
-        /* left: 130px; */
-    }
-
-    .carousel-caption
-    {
-        top: 110px;
-        display: block !important;
-    }
-
-    .carousel-caption > h5, .carousel-caption > p
-    {
-       font-size: small;
+        right: -60px;
+        bottom: 420px;
+        left: 130px;
     }
 
     .spell-Type
@@ -291,118 +222,32 @@ footer{
         margin-bottom: 0px;
         font-size: 11.5px;
     }
-
-    .nav-link
-    {
-        font-size: small;
-    }
-
-    #logo {
-        width: 120% !important;
-    }
-
-    .fontCartPrice 
-    {
-        font-size: 11px;
-    }
-
-    .footer > div > div
-    {
-        align-items: center;
-    }
-
-    .logo-footer
-    {
-        width: 40%;
-    }
-
-    .slogan
-    {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .slogan > div 
-    {
-        width: 100%;
-    }
-
-    .slogan > div > a
-    {
-        display: flex;
-        justify-content: center;
-    }
-    .slogan > p
-    {
-        display: flex;
-        text-align: start;
-    }
-
 }
 
 /* Mobile M */
 @media screen and (min-width: 322px) and (max-width: 376px) 
 {
-    .content
-    {
-        padding-bottom: 31rem;
-    }
-
-    footer
-    {
-        height: 31rem;
-    }
-
-    .minus
-    {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .plus
-    {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .qty
-    {
-        padding: 0.5em;
-    }
-
     .page-link
     {
         font-size: 10px;
     }
 
-    .nav-link
+    .championDetails 
     {
-        font-size: small;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .championDetailsParagraph 
+    {
+        font-size: 17px;
     }
 
     .carousel-indicators
     {
-        /* right: -60px; */
+        right: -60px;
         bottom: 460px;
-        /* left: 190px; */
-    }
-
-    .carousel-caption
-    {
-        display: block !important;
-        top: 130px;
-    }
-
-    .carousel-caption > h5, .carousel-caption > p
-    {
-       font-size: small;
+        left: 190px;
     }
 
     .spell-Type
@@ -422,46 +267,11 @@ footer{
         margin-bottom: 0px;
         font-size: 12px;
     }
-
-    .championDetails 
-    {
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    .championDetailsParagraph 
-    {
-        font-size: 17px;
-    }
-
-    #logo {
-        width: 120% !important;
-    }
-
-    .fontCartPrice 
-    {
-        font-size: 13px;
-    }
-
-    .logo-footer
-    {
-        width: 35%;
-    }
 }
 
 /* Mobile L */
-@media screen and (min-width: 377px) and (max-width: 481px) 
+@media screen and (min-width: 377px) and (max-width: 469px) 
 {
-    .content
-    {
-        padding-bottom: 31rem;
-    }
-
-    footer
-    {
-        height: 31rem;
-    }
-
     .page-link
     {
         font-size: 12px;
@@ -481,7 +291,6 @@ footer{
     #splash
     {
         padding: 0;
-        /* margin-top: 19px; */
     }
 
     .splashImg
@@ -511,20 +320,14 @@ footer{
 
     .nav-link
     {
-        font-size: small;
+        font-size: x-small;
     }
 
     .carousel-indicators
     {
-        /* right: -80px; */
+        right: -80px;
         bottom: 510px;
-        /* left: 185px; */
-    }
-
-    .carousel-caption
-    {
-        display: block !important;
-        top: 135px;
+        left: 185px;
     }
 
     .spell-Type
@@ -544,32 +347,11 @@ footer{
         margin-bottom: 0px;
         font-size: 14px;
     }
-
-    .fontCartPrice 
-    {
-        font-size: 12px;
-    }
-
-    .logo-footer
-    {
-        width: 35%;
-    }
 }
 
 /* Tablette */
 @media only screen and (min-width: 481px) and (max-width: 768px)
 {
-
-    .content
-    {
-        padding-bottom: 31rem;
-    }
-
-    footer
-    {
-        height: 31rem;
-    }
-
     .splashImg
     {
         width: 138%;
@@ -625,10 +407,8 @@ footer{
 
     .carousel-indicators
     {
-        /* right: -60px;
-        left: 490px; */
-        top: 430px;
-        padding-top: 2px;
+        right: -60px;
+        left: 490px;
         bottom: 550px;
     }
 
@@ -637,26 +417,11 @@ footer{
         width: 10%;
         border-radius: 50%;
     }
-
-    .logo-footer
-    {
-        width: 30%;
-    }
 }
 
 /* Laptop */
 @media only screen and (min-width: 769px) and (max-width: 1024px)
-{ 
-    .content
-    {
-        padding-bottom: 19rem;
-    }
-
-    footer
-    {
-        height: 19rem;
-    }
-    
+{  
     .navbar-toggler
     {
         display: none !important;
@@ -686,7 +451,7 @@ footer{
     .spell-box
     {
         width: 40vw;
-        height: 45vh;
+        height: 45vh
     }
 
     .spell-box > p
@@ -704,43 +469,22 @@ footer{
 
     .carousel-caption
     {
-        margin-right: 33%;
-    }
-
-    .carousel-indicators
-    {
-        margin-left: 28%;
-        justify-content: unset;
+        margin-right: 20em;
     }
 
     .img-fluid 
     {
         height: 30.2em;
     }
-
-    .logo-footer
-    {
-        width: 40%;
-    }
 }
 
 /* Large Screen */
 @media only screen and (min-width: 1025px) and (max-width: 1200px)
 {
-    /* .spell-box
+    /* #logo
     {
-        height: 45vh;
-        .spell-box > h5
-        {
-            font-size: 45px;
-        }
-        
-        .spell-box > p 
-        {
-            font-size: x-large;
-        }
+        width: 60% !important;
     } */
-
     .spell-box
     {
         height: 45vh;
@@ -748,49 +492,22 @@ footer{
 
     .carousel-caption
     {
-        margin-right: 33%;
+        margin-right: 35em;
     }
 
-    .carousel-indicators
+    /* #champBox
     {
-        margin-left: 30%;
-        justify-content: unset;
-    }
-
-    .logo-footer
-    {
-        width: 30%;
-    }
-
-    .content
-    {
-        padding-bottom: 19rem;
-    }
-
-    footer
-    {
-        height: 19rem;
-    }
-
-    .spell-Icon
-    {
-        width: 4%;
-    }
+        align-items: center !important;
+    } */
 }
 
 /* TV, xtra large screen */
-@media only screen and (min-width: 1201px)  and (max-width: 1500px)
+@media only screen and (min-width: 1201px)  and (max-width: 2900px)
 {
-    .content
+    /* #logo
     {
-        padding-bottom: 17rem;
-    }
-
-    footer
-    {
-        height: 17rem;
-    }
-
+        width: 60% !important;
+    } */
     .spell-box
     {
         height: 50vh
@@ -798,74 +515,6 @@ footer{
 
     .carousel-caption
     {
-        margin-right: 33%;
-    }
-
-    .carousel-indicators
-    {
-        margin-left: 30%;
-        justify-content: unset;
-    }
-
-    .spell-box > h5
-    {
-        font-size: 25px;
-    }
-    
-    .spell-box > p 
-    {
-        font-size: larger;
-    }
-
-    .spell-Icon
-    {
-        width: 6%;
+        margin-right: 35em;
     }
 }
-
-@media only screen and (min-width: 1501px)  and (max-width: 2900px)
-{
-    .content
-    {
-        padding-bottom: 17rem;
-    }
-
-    footer
-    {
-        height: 17rem;
-    }
-
-    .spell-box
-    {
-        height: 80%;
-    }
-    
-    .spell-box > h5
-    {
-        font-size: 45px;
-    }
-    
-    .spell-box > p 
-    {
-        font-size: x-large;
-    }
-
-    .spell-Icon
-    {
-        width: 6%;
-    }
-
-    .carousel-caption
-    {
-        margin-right: 33%;
-    }
-
-    .carousel-indicators
-    {
-        margin-left: 30%;
-        justify-content: unset;
-    }
-}
-
-
-

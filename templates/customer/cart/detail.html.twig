@@ -1,81 +1,84 @@
 {% extends "customer/base.html.twig" %}
 
-{% block title %} Wiki - Mon Panier {% endblock %}
+{% block title %}
+	Wiki - Mon Panier
+{% endblock %}
 
 {% block body %}
 
-    {% include "/customer/shared/_messages_flash.html.twig" %}    
-    <div class="container py-5">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12">
-                <h3 class="text-center">
-                    Mon panier
-                </h3>
-            </div>
-            <div class="col-sm-12 col-md-10 col-lg-8 mt-3">
+	{% include "/customer/shared/_messages_flash.html.twig" %}
+	<div class="container py-5">
+		<div class="row align-items-center justify-content-center">
+			<div class="col-12">
+				<h3 class="text-center">
+					Mon panier
+				</h3>
+			</div>
+			<div class="col-sm-12 col-md-10 col-lg-8 mt-3">
+				<div class="card">
+					<div class="card-body">
+						{% if cart | length > 0 %}
+                                <div class="d-flex justify-content-evenly border-bottom">
+                                    <div class="col-6 col-md-6 col-xl-7 ps-5">
+										<p class="ms-md-4" scope="col">Produit</p>
+                                    </div>
+									<div class="d-flex justify-content-between align-items-end col-6 col-md-5 col-xl-3 me-4 me-md-5 me-lg-4 pe-xl-2">
+										<p scope="col">P.U</p>
+										<p scope="col">Qté</p>
+										<p scope="col">Total</p>
+									</div>
+                                </div>
+									<div class="d-flex flex-column">
+										{% for item in cart %}
+											<div class="d-flex justify-content-between border-bottom py-3 p-md-4">
+												<div class="col-4">
+													<img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart w-100 img-fluid">
+													<div class="d-flex flex-column text-center">
+														<p>{{ item.product.name }}</p>
+														<a class="btn btn-link text-danger btn-sm" href="{{ path('cart_remove',{'id' : item.product.id }) }}">
+															<i class="fas fa-trash"></i>
+															Supprimer</a>
+													</div>
+												</div>
+												<div class="col-8 d-flex flex-row justify-content-end align-items-center h-25">
+													<h5 class="mb-0 fontCartPrice">{{ item.product.price | priceFormatEuro }}</h5>
+													<a class="btn btn-dark ms-2 minus" href="{{ path('cart_decrement',{'id': item.product.id}) }}">
+														<i class="fas fa-minus-circle"></i>
+													</a>
+													<button class="btn btn-light qty">{{ item.qty }}</button>
+													<a class="btn btn-dark me-2 plus" href="{{ path('cart_add',{'id': item.product.id}) }}?returnToCart=true">
+														<i class="fas fa-plus-circle"></i>
+													</a>
+													<h5 class="mb-0 fontCartPrice ">{{ item.total | priceFormatEuro }}</h5>
+												</div>
+											</div>
+										{% endfor %}
+										<div class="d-flex justify-content-end align-items-end flex-column me-1 mt-1">
+											<th colspan="2"></th>
+											<th>
+												<strong>Sous Total</strong>
+											</th>
+											<th>
+												<strong>{{ totalCart | priceFormatEuro }}</strong>
+											</th>
+                                            <div class="mt-2">
+                                                <a href="{{ path('command_recap') }}" class="btn btn-secondary">
+                                                    Valider mon panier</a>
+                                            </div>
+										</div>
+									</div>
 
-                <div class="card">
-                    <div class="card-body">
-                        {% if cart | length > 0 %}
+						{% else %}
+							<p class="d-flex justify-content-center mt-4">
+								Le panier est vide.</p>
+							<br/>
+							<a class="btn btn-link d-flex text-black justify-content-center" href="{{ path('customer_home') }}">Continuer le shopping</a>
+						{% endif  %}
+					</div>
+				</div>
 
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Produit</th>
-                                            <th scope="col">P.U</th>
-                                            <th scope="col" >Qté</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for item in cart %}
-                                            <tr class="d-flex align-items-between">
-                                                <td>
-                                                    <div class="d-flex flex-column justify-content-start">
-                                                        <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart w-100 h-50">
-                                                        <div class="d-flex flex-column text-center">
-                                                            <p>{{ item.product.name }}</p>
-                                                            <a class="btn btn-link text-danger btn-sm" href="{{ path('cart_remove',{'id' : item.product.id }) }}"><i class="fas fa-trash"></i> Supprimer</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <td>{{ item.product.price | priceFormatEuro }}</td>
-                                                    <td>
-                                                        <div class="d-flex flex-row">
-                                                            <a class="btn btn-dark" href="{{ path('cart_decrement',{'id': item.product.id}) }}"><i class="fas fa-minus-circle"></i></a>
-                                                            <button class="btn btn-light">{{ item.qty }}</button>
-                                                            <a class="btn btn-dark" href="{{ path('cart_add',{'id': item.product.id}) }}?returnToCart=true"><i class="fas fa-plus-circle"></i></a>
-                                                        </div>
-                                                    </td>
-                                                    <td>{{ item.total | priceFormatEuro }}</td>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                        <tr>
-                                            <th colspan="2"></th>
-                                            <th><strong>Sous Total</strong></th>
-                                            <th><strong>{{ totalCart | priceFormatEuro }}</strong></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <a href="{{ path('command_recap') }}" class="btn btn-secondary"> Valider mon panier</a>
-                            </div>
-
-                        {% else %}
-                            <p class="d-flex justify-content-center mt-4"> Le panier est vide.</p>
-                            <br/>   
-                            <a class="btn btn-link d-flex text-black justify-content-center" href="{{ path('customer_home') }}">Continuer le shopping</a>
-                        {% endif  %}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
