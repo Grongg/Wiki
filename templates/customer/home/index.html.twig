@@ -198,7 +198,7 @@
 					<div class="row" id="category">
 						{% for product in category.products | slice(0, 6)  %}
 							<div class="col-auto pb-5" id="card">
-								<div class="card object-fit-content" style="height: 8em; max-width: 13em; width: auto;">
+								<div class="card object-fit-content" style="height: 10.7em; max-width: 13em; border: none; width: auto;">
 									<a href="{{ path("customer_product", {'id': product.id}) }}">
 										<img src="{{ product.image }}" class="card-img-top" alt="{{product.name}}" id="pdt-img">
 									</a>
@@ -207,7 +207,7 @@
 						{% endfor %}
 					</div>
 				</div>
-				<div class="col-md-12 col-lg-12 col-sg-12 col-xl-12 col-xs-12 ps-5 pb-4">
+				<div class="col-md-12 col-lg-12 col-sg-12 col-xl-12 col-xs-12 ps-5 pb-4 view-more">
 					<a class="ms-1 btn btn-secondary" href="{{ path("customer_category", { 'id' : category.id }) }}">View More ...</a>
 				</div>
 			</div>
@@ -216,5 +216,5 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="../../js/homeSections.js" type="text/javascript"></script>
+	<script src="{{ asset('js/homeSections.js') }}"></script>
 {% endblock %}
