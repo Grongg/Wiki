@@ -1,0 +1,27 @@
+{% extends 'ROLE_ADMIN' in roles ? 'admin/base.html.twig' : 'customer/base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    {% include "/customer/shared/_messages_flash.html.twig" %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <h1 class="text-center">Reset your password</h1>
+
+    <div class="container mt-5 d-flex justify-content-center text-center">
+        <div class="xxl-col-5 xl-col-5 lg-col-6 d-flex justify-content-center text-center pb-5">
+            {{ form_start(requestForm) }}
+                {{ form_row(requestForm.email) }}
+                <div class="text-start pb-3">
+                    <small>
+                        Enter your email address and we will send you a
+                        link to reset your password.
+                    </small>
+                </div>
+
+                <button class="btn btn-primary">Send password reset email</button>
+            {{ form_end(requestForm) }}
+        </div>
+    </div>
+{% endblock %}
