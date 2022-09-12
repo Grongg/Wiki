@@ -645,6 +645,13 @@ footer{
     {
         justify-content: center;
     }
+    .view-more
+    {
+        /* padding-top: 50px; */
+        display: flex;
+        /* padding-left: 0 !important; */
+        justify-content: center;
+    }
 
 }
 

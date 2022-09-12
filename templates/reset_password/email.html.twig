@@ -1,13 +1,13 @@
 <h1 class="text-center">Hi!</h1>
 <div class="container mt-5 d-flex justify-content-center text-center">
     <div class="col6">
-        <p>To reset your password, please visit the following link</p>
+        <p>Pour réinitialiser votre mot de passe, veuillez visiter le lien suivant</p>
 
         <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-        <p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+        <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
     
-        <p><strong>Cheers!</strong></p>
+        <p><strong>A bientôt!</strong></p>
     </div>
 </div>
 

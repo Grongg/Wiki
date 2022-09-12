@@ -51,13 +51,8 @@ class ResetPasswordController extends AbstractController
                 $translator
             );
         }
-        
-        /** @var User */
-        $user = $this->getUser();
-        if ($user)
-            $roles = $user->getRoles();
-        else
-            return $this->redirectToRoute('customer_home');
+
+        $roles[] = "ROLE_USER";
 
         $session = $cookieService->checkAndSetCookieNoRepeat($request);
         return $this->render('reset_password/request.html.twig', [
@@ -79,15 +74,9 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
-         /** @var User */
-         $user = $this->getUser();
-         if ($user)
-             $roles = $user->getRoles();
-         else
-             return $this->redirectToRoute('customer_home');
+        $roles[] = "ROLE_USER";
  
          $session = $cookieService->checkAndSetCookieNoRepeat($request);
-
         return $this->render('reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
             'session' => $session,
@@ -174,7 +163,6 @@ class ResetPasswordController extends AbstractController
         if (!$user) {
             return $this->redirectToRoute('app_check_email');
         }
-
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {
@@ -182,17 +170,18 @@ class ResetPasswordController extends AbstractController
             // the lines below and change the redirect to 'app_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
             //
-            // $this->addFlash('reset_password_error', sprintf(
-            //     '%s - %s',
-            //     $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE, [], 'ResetPasswordBundle'),
-            //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
-            // ));
-
+            $this->addFlash('reset_password_error', sprintf(
+                '%s - %s',
+                $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE, [], 'ResetPasswordBundle'),
+                $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
+            ));
+            // dd("ici2");
             return $this->redirectToRoute('app_check_email');
         }
 
+
         $email = (new TemplatedEmail())
-            ->from(new Address('no-reply@wikilds.com', 'Wiki Mail Bot'))
+            ->from(new Address('noreply@wiki-lol.com', 'Wiki Mail Bot'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')
@@ -200,9 +189,7 @@ class ResetPasswordController extends AbstractController
                 'resetToken' => $resetToken,
             ])
         ;
-
         $mailer->send($email);
-
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 

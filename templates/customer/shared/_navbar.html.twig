@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="width: 24%">
+    <a class="navbar-brand" href="{{ path("customer_home") }}" style="width: 24%">
       <img src="https://cdn.discordapp.com/attachments/199640883971358720/1002590477503168643/logo_test.png" alt="logo" id="logo" width="70%">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,20 +9,33 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Collection</a>
+          <a class="nav-link active" aria-current="page" href="{{ path("nonsigned_collection") }}"><i class="fa fa-archive" aria-hidden="true"></i> Collection</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{{ path("customer_champion_index") }}">Champions</a>
+          <a class="nav-link active" href="{{ path("customer_champion_index") }}"><i class="fa fa-gamepad" aria-hidden="true"></i> Champions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Se Deconnecter</a>
+          <a class="nav-link active" href="{{ path("contact") }}"><i class="fa fa-envelope" aria-hidden="true"></i> Prendre Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Mon panier</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Mon Compte</a>
-        </li>
+        {% if app.user  %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path("cart_detail") }}" tabindex="-1" aria-disabled="true"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Mon Panier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path("customer_profile", {'id': app.user.id}) }}" tabindex="-1" aria-disabled="true"><i class="fa fa-user" aria-hidden="true"></i> Mon Compte</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link active" href="{{ path("app_logout") }}" tabindex="-1" aria-disabled="true"><i class="fa fa-sign-out" aria-hidden="true"></i> Se Deconnecter</a>
+          </li>
+        {% endif %}
+        {% if not app.user  %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path("app_login") }}" tabindex="-1" aria-disabled="true"><i class="fa fa-sign-in" aria-hidden="true"></i> Se Connecter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path("app_register") }}" tabindex="-1" aria-disabled="true"><i class="fa fa-user-plus" aria-hidden="true"></i> S'enregistrer</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>

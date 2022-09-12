@@ -15,11 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/profile/{id}', name: 'customer_profile')]
-    public function index(CookieService $cookieService, Request $request) : Response
+    public function index(int $id, CookieService $cookieService, UserRepository $userRepository, Request $request) : Response
     {
         $session = $cookieService->checkAndSetCookieNoRepeat($request);
-        /** @var User $user */
-        $user = $this->getUser();
+        $user = $userRepository->find($id);
 
         return $this->render('customer/profile/index.html.twig', [
             "commands" => $user->getCommandShops(),
@@ -28,7 +27,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/{id}/edit', name: 'customer_edit_profile')]
-    public function edit($id, Request $request, EntityManagerInterface $em, HandleImage $handleImage, UserRepository $userRepository,
+    public function edit(int $id, Request $request, EntityManagerInterface $em, HandleImage $handleImage, UserRepository $userRepository,
     CookieService $cookieService) : Response
     {
         $session = $cookieService->checkAndSetCookieNoRepeat($request);
