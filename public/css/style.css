@@ -234,6 +234,12 @@ footer{
         height: 40rem;
     }
 
+    .log
+    {
+        flex: 0 0 auto !important;
+        width: 91.66666667% !important;
+    }
+
     .minus
     {
         width: 30px;
@@ -400,6 +406,12 @@ footer{
         height: 31rem;
     }
 
+    .log
+    {
+        flex: 0 0 auto !important;
+        width: 91.66666667% !important;
+    }
+
     .minus
     {
         width: 30px;
@@ -536,6 +548,12 @@ footer{
     footer
     {
         height: 31rem;
+    }
+
+    .log
+    {
+        flex: 0 0 auto !important;
+        width: 91.66666667% !important;
     }
 
     .page-link
@@ -748,6 +766,17 @@ footer{
     {
         top: 430px;
         margin-right: 0 !important;
+        display: none !important;
+    }
+    
+    .navbar-toggler-icon 
+    {
+        display: block !important;
+    }
+ 
+    .navbar-toggler 
+    {
+        display: block !important;
     }
 
     .carousel-indicators
@@ -762,6 +791,20 @@ footer{
     }
 }
 
+@media only screen and (min-width: 992px) and (max-width: 1024px)
+{
+    .navbar-toggler-icon 
+    {
+        display: none !important;
+    }
+ 
+    .navbar-toggler 
+    {
+        display: none !important;
+    }
+}
+
+
 /* Laptop */
 @media only screen and (min-width: 769px) and (max-width: 1024px)
 { 
@@ -773,16 +816,6 @@ footer{
     footer
     {
         height: 19rem;
-    }
-    
-    .navbar-toggler
-    {
-        display: none !important;
-    }
-
-    .navbar-toggler-icon
-    {
-        display: none !important;
     }
     
     .imagechampionDetail
