@@ -176,11 +176,12 @@ class ContentCollectionController extends AbstractController
             {
                 $champs[] = $championRepository->findOneBy(['id' => $champion->getChampion()->getId()]);
             }
-            dump($champs);
             return $this->render('customer/collection/favorites.html.twig', [
                 'champions' => $champs,
                 'session' => $session
             ]);
         }
+        else
+            return $this->redirectToRoute('app_login');
     }
 }

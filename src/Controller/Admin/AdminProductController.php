@@ -4,8 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use App\Services\HandleImage;
 use App\Repository\ProductRepository;
+use App\Services\HandleImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class AdminProductController extends AbstractController
     }
 
     #[Route('/new', name: 'admin_product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, HandleImage $handleImage): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, HandleImageService $handleImage): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -71,7 +71,7 @@ class AdminProductController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'admin_product_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager, HandleImage $handleImage): Response
+    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager, HandleImageService $handleImage): Response
     {
         $oldImage = $product->getImage();
         $form = $this->createForm(ProductType::class, $product);

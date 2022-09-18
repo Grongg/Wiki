@@ -690,10 +690,9 @@ footer{
         border-radius: 50%;
     }
 
-    .spell-Icon
+    .champProf > .spell-Icon
     {
-        width: 10%;
-        border-radius: 50%;
+        width: 15% !important;
     }
 
     .imagechampionDetail
@@ -740,6 +739,26 @@ footer{
     .logo-footer
     {
         width: 30%;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 991px)
+{
+    .carousel-caption
+    {
+        top: 430px;
+        margin-right: 0 !important;
+    }
+
+    .carousel-indicators
+    {
+        /* right: -60px;
+        left: 490px; */
+        top: 430px;
+        padding-top: 2px;
+        bottom: 550px;
+        margin-left: 15% !important;
+        justify-content: center !important;
     }
 }
 
@@ -821,6 +840,11 @@ footer{
     {
         width: 40%;
     }
+    
+    .champProf > .spell-Icon
+    {
+        width: 28% !important;
+    }
 }
 
 /* Large Screen */
@@ -871,9 +895,14 @@ footer{
         height: 19rem;
     }
 
+    .champProf > .spell-Icon
+    {
+        width: 6% !important;
+    }
+
     .spell-Icon
     {
-        width: 4%;
+        width: 11%;
     }
 }
 
@@ -916,9 +945,14 @@ footer{
         font-size: larger;
     }
 
+    .champProf > .spell-Icon
+    {
+        width: 8% !important;   
+    }
+
     .spell-Icon
     {
-        width: 6%;
+        width: 15%;
     }
 }
 
@@ -949,9 +983,14 @@ footer{
         font-size: x-large;
     }
 
+    .champProf > .spell-Icon
+    {
+        width: 8% !important;   
+    }
+
     .spell-Icon
     {
-        width: 6%;
+        width: 15%;
     }
 
     .carousel-caption

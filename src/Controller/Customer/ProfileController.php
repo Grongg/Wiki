@@ -2,15 +2,15 @@
 
 namespace App\Controller\Customer;
 
+use App\Services\CookieService;
 use App\Form\EditProfileFormType;
 use App\Repository\UserRepository;
-use App\Services\CookieService;
-use App\Services\HandleImage;
+use App\Services\HandleImageService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {
@@ -27,7 +27,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/{id}/edit', name: 'customer_edit_profile')]
-    public function edit(int $id, Request $request, EntityManagerInterface $em, HandleImage $handleImage, UserRepository $userRepository,
+    public function edit(int $id, Request $request, EntityManagerInterface $em, HandleImageService $handleImage, UserRepository $userRepository,
     CookieService $cookieService) : Response
     {
         $session = $cookieService->checkAndSetCookieNoRepeat($request);

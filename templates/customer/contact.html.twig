@@ -14,7 +14,10 @@
                     </div>
                     <div class="card-body">
                         {{ form_start(form) }}
-                        {{ form_widget(form) }}
+                            <h6>Veuillez entrer votre email ici: </h6>
+                            {{ form_row(form.email_customer) }}
+                             <h6>Veuillez entrer votre message ici: </h6>
+                            {{ form_row(form.content) }}
                         <button class="btn btn-primary mt-3">Envoyer</button>
                         {{ form_end(form) }}
                     </div>

@@ -16,7 +16,7 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('email_customer', EmailType::class, [
-                'label' => 'Votre email',
+                'label' => false,
                 'required' => false,
                 'constraints' => [
                     new NotBlank([
@@ -25,7 +25,7 @@ class ContactType extends AbstractType
                 ]
             ])
             ->add('content', CKEditorType::class, [
-                'label' => 'Le contenu du message',
+                'label' => false, 
                 'required' => false,
                 'constraints' => [
                     new NotBlank([

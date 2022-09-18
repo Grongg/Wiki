@@ -2,23 +2,25 @@
 
 namespace App\Controller\Customer;
 
-use App\Entity\ContentCollection;
 use App\Entity\User;
+use App\Services\HandleImageService;
+use App\Services\CookieService;
+use App\Entity\ContentCollection;
 use App\Form\RegistrationFormType;
 use App\Security\ChunAuthenticator;
-use App\Services\CookieService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class CustomerRegistrationController extends AbstractController
 {
     #[Route('/customer/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, ChunAuthenticator $authenticator, EntityManagerInterface $entityManager,
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, ChunAuthenticator $authenticator, HandleImageService $handleImage, EntityManagerInterface $entityManager,
     CookieService $cookieService): Response
     {
         $session = $cookieService->checkAndSetCookieNoRepeat($request);
@@ -39,6 +41,16 @@ class CustomerRegistrationController extends AbstractController
                 )
             );
 
+            /** @var UploadedFile $file */
+            $file = $form->get('file')->getData();
+            if ($file)
+            {
+                $handleImage->save($file, $user, true);
+            }
+            else
+            {
+                $handleImage->saveDefault($user);
+            }
             $entityManager->persist($user);
             $contentCollection = new ContentCollection();
             $contentCollection->setUser($user);

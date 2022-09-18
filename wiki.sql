@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 29, 2022 at 08:02 PM
+-- Generation Time: Sep 17, 2022 at 03:32 PM
 -- Server version: 5.7.36
 -- PHP Version: 8.1.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `wiki`
 --
+CREATE DATABASE IF NOT EXISTS `wiki` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `wiki`;
 
 -- --------------------------------------------------------
 
@@ -249,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `command_shop` (
   `total_price` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_DC0E22FA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `command_shop`
@@ -281,7 +283,8 @@ INSERT INTO `command_shop` (`id`, `user_id`, `created_at`, `is_payed`, `total_pr
 (23, 2, '2022-03-09 08:37:41', 1, 704),
 (24, 6, '2022-03-18 14:30:29', 1, 704),
 (25, 2, '2022-04-28 09:18:25', 0, 4213),
-(26, 2, '2022-07-17 21:34:50', 0, 20000);
+(26, 2, '2022-07-17 21:34:50', 0, 20000),
+(27, 2, '2022-08-03 14:30:46', 1, 1500);
 
 -- --------------------------------------------------------
 
@@ -298,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `command_shop_line` (
   PRIMARY KEY (`id`),
   KEY `IDX_97D71D86A27C973E` (`command_shop_id`),
   KEY `IDX_97D71D864584665A` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `command_shop_line`
@@ -309,7 +312,8 @@ INSERT INTO `command_shop_line` (`id`, `command_shop_id`, `product_id`, `quantit
 (2, 26, 41, 1),
 (3, 26, 10, 2),
 (4, 26, 11, 1),
-(5, 26, 14, 2);
+(5, 26, 14, 2),
+(6, 27, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -324,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `content_collection` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_6574D3C0A76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `content_collection`
@@ -332,7 +336,8 @@ CREATE TABLE IF NOT EXISTS `content_collection` (
 
 INSERT INTO `content_collection` (`id`, `created_at`, `user_id`) VALUES
 (5, '2022-07-29 14:37:04', NULL),
-(6, '2022-07-29 14:37:35', 2);
+(6, '2022-07-29 14:37:35', 2),
+(7, '2022-09-11 23:56:29', 7);
 
 -- --------------------------------------------------------
 
@@ -351,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `delivery_address` (
   `commentary` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_750D05FA27C973E` (`command_shop_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `delivery_address`
@@ -383,7 +388,8 @@ INSERT INTO `delivery_address` (`id`, `command_shop_id`, `country`, `city`, `pos
 (23, 23, 'France', 'Ile de France', '75000', '4 rue aller non', NULL),
 (24, 24, 'a', 'a', 'a', 'a', NULL),
 (25, 25, 'iiiiiii', 'iiiiiiiiiiii', 'iii', 'iiiiii', 'iiiiiiii'),
-(26, 26, 'iiiiiii', 'iiiiiiiiiiii', 'iii', 'iiiiii', 'iiiiiiii');
+(26, 26, 'iiiiiii', 'iiiiiiiiiiii', 'iii', 'iiiiii', 'iiiiiiii'),
+(27, 27, 'iiiiiii', 'iiiiiiiiiiii', 'iii', 'iiiiii', 'iiiiiiii');
 
 -- --------------------------------------------------------
 
@@ -425,7 +431,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20220620183517', '2022-06-20 18:35:20', 117),
 ('DoctrineMigrations\\Version20220620184023', '2022-06-20 18:40:27', 116),
 ('DoctrineMigrations\\Version20220717214040', '2022-07-17 21:40:48', 396),
-('DoctrineMigrations\\Version20220717214147', '2022-07-17 21:41:50', 149);
+('DoctrineMigrations\\Version20220717214147', '2022-07-17 21:41:50', 149),
+('DoctrineMigrations\\Version20220909171106', '2022-09-09 17:11:51', 145);
 
 -- --------------------------------------------------------
 
@@ -494,6 +501,31 @@ INSERT INTO `product` (`id`, `category_id`, `name`, `image`, `price`) VALUES
 (50, 6, 'Tee-shirt Jinx', '/uploads/images/tee-shirt-jinx01-2d39f159c1a32586c93fcf8682989072.png', 2000),
 (51, 6, 'Tee-shirt Fizz', '/uploads/images/tee-shirt-Fizz-2c610075f0e7d6fa1993b4824153abdb.png', 1000),
 (52, 7, 'Sweat lol is more interesting', '/uploads/images/sweat-lol-superior-life-632f4b07f33fa8e505ba6e421ef921c8.png', 4500);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reset_password_request`
+--
+
+DROP TABLE IF EXISTS `reset_password_request`;
+CREATE TABLE IF NOT EXISTS `reset_password_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `selector` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hashed_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `requested_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  PRIMARY KEY (`id`),
+  KEY `IDX_7CE748AA76ED395` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reset_password_request`
+--
+
+INSERT INTO `reset_password_request` (`id`, `user_id`, `selector`, `hashed_token`, `requested_at`, `expires_at`) VALUES
+(8, 7, '2aiTEaG92vvx0rrPl5s1', 'UbHLU6cCMaI/culPXDMwFjO2sUuPBIymkV0/Rhs+qP4=', '2022-09-12 00:50:46', '2022-09-12 01:50:46');
 
 -- --------------------------------------------------------
 
@@ -1370,7 +1402,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `cover` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -1382,7 +1414,8 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `name`, `pseudo`, `image
 (3, 'user2.user@user.user', '[]', '$2y$13$Hn3fzDQ5J2o8u/H0/xfxEuFMD9LFqaEphhCLfH0Efy54J1NnWMUEu', 'user2', 'User2', NULL, NULL),
 (4, 'user3.user@user.user', '[]', '$2y$13$amO/SLoeI0Vvkd4RACrYwOQMIEh0pCEsCr0XpuAOleyiZM6cmcKMe', 'user3', 'User3', NULL, NULL),
 (5, 'admin2@admin.admin', '[\"ROLE_ADMIN\"]', '$2y$13$QAl2GWhXqRbuJpNMbNeLiefTv.NS4cpFyM2chx7MrYL98uBvfMzKq', 'admin2', 'admin2', NULL, NULL),
-(6, 'user4@user.user', '[]', '$2y$13$Hzvh8MjQJyN23t4lhoxXHeYHtohQl3pFNcsnscOCw6J2zMK2zfn4K', 'user4 user', 'User le 4ème', NULL, NULL);
+(6, 'user4@user.user', '[]', '$2y$13$Hzvh8MjQJyN23t4lhoxXHeYHtohQl3pFNcsnscOCw6J2zMK2zfn4K', 'user4 user', 'User le 4ème', NULL, NULL),
+(7, 'lio.poleemploi@gmail.com', '[]', '$2y$13$MlGSd8KgMQxvPQYq.fQAgONKXaEGq4abCTjdnEnxJt.0doxISt23a', 'Lionel', 'Grong', NULL, NULL);
 
 --
 -- Constraints for dumped tables
@@ -1418,6 +1451,12 @@ ALTER TABLE `delivery_address`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `FK_D34A04AD12469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+--
+-- Constraints for table `reset_password_request`
+--
+ALTER TABLE `reset_password_request`
+  ADD CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `selected_champion`

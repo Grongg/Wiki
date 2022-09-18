@@ -20,7 +20,7 @@ class StripeController extends AbstractController
     {
         Stripe::setApiKey(file_get_contents(".token"));
 
-        $domain = 'http://localhost:8000/';
+        $domain = 'https://www.wikilol.fr/';
 
         /** @var CartRealProduct[] $detailCart */
         $detailCart = $cartService->detail();
@@ -37,7 +37,7 @@ class StripeController extends AbstractController
                     'product_data' => [
                         'name' => $item->getProduct()->getName(),
                         'images' => [
-                            $domain . $item->getProduct()->getImage()
+                            $item->getProduct()->getImage()
                         ]
                     ]
                 ],

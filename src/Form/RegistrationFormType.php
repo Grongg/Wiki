@@ -49,8 +49,8 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Upload une Image',
                 'constraints' => [
                     new File([
-                        'maxSize' => '1m',
-                        'maxSizeMessage' => 'Le poids ne peut pas depasser 1mo, le fichier est trop lourd'
+                        'maxSize' => '10m',
+                        'maxSizeMessage' => 'Le poids ne peut pas depasser 10mo, le fichier est trop lourd'
                     ])
                 ]
             ])
