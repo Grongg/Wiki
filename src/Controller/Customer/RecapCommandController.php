@@ -19,6 +19,14 @@ class RecapCommandController extends AbstractController
     #[Route('/command/recap', name: 'command_recap')]
     public function recap(Request $request, EntityManagerInterface $em, CartService $cartService, CookieService $cookieService)
     {
+        /** @var User */
+        $user = $this->getUser();
+        if (!$user)
+        {
+            $session = $request->getSession();
+            $session->set('previousHeader', $request->headers->get('referer'));
+            return $this->redirectToRoute('app_login');
+        }
         $session = $cookieService->checkAndSetCookieNoRepeat($request);
         $deliveryAddress = new DeliveryAddress();
         $form = $this->createForm(DeliveryAddressType::class, $deliveryAddress);
@@ -27,8 +35,6 @@ class RecapCommandController extends AbstractController
         $cart = $cartService->detail();
         $totalCart = $cartService->getTotal();
 
-        /** @var User */
-        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid())
         {

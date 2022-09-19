@@ -32,7 +32,7 @@
 										{% for item in cart %}
 											<div class="d-flex justify-content-between border-bottom py-3 p-md-4">
 												<div class="col-4">
-													<img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart w-100 img-fluid">
+													<img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="w-100 img-fluid">
 													<div class="d-flex flex-column text-center">
 														<p>{{ item.product.name }}</p>
 														<a class="btn btn-link text-danger btn-sm" href="{{ path('cart_remove',{'id' : item.product.id }) }}">

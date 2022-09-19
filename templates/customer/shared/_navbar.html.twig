@@ -9,6 +9,9 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path("shop") }}"><i class="fa-solid fa-shop"></i> Le Shop</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path("nonsigned_collection") }}"><i class="fa fa-archive" aria-hidden="true"></i> Collection</a>
         </li>
         <li class="nav-item">
@@ -17,10 +20,10 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ path("contact") }}"><i class="fa fa-envelope" aria-hidden="true"></i> Prendre Contact</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path("cart_detail") }}" tabindex="-1" aria-disabled="true"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Mon Panier</a>
+        </li>
         {% if app.user  %}
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ path("cart_detail") }}" tabindex="-1" aria-disabled="true"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Mon Panier</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{ path("customer_profile", {'id': app.user.id}) }}" tabindex="-1" aria-disabled="true"><i class="fa fa-user" aria-hidden="true"></i> Mon Compte</a>
           </li>

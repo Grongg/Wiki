@@ -48,13 +48,18 @@ class ChunAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
+        $session = $request->getSession();
         $user = $token->getUser();
 
         if ($user->getRoles()[0] === "ROLE_ADMIN")
             return new RedirectResponse($this->urlGenerator->generate('admin_home'));
         else
-            return new RedirectResponse($this->urlGenerator->generate('customer_home'));
+        {
+            if($session->get('previousHeader') === "https://127.0.0.1:8000/cart/detail")    
+                return new RedirectResponse($this->urlGenerator->generate('cart_detail'));
+            else
+                return new RedirectResponse($this->urlGenerator->generate('customer_home'));
+        }
     }
 
     protected function getLoginUrl(Request $request): string

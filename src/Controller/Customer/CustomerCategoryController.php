@@ -3,6 +3,7 @@
 namespace App\Controller\Customer;
 
 use App\Services\CookieService;
+use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,22 @@ class CustomerCategoryController extends AbstractController
 
         return $this->render('customer/customer_category/category.html.twig', [ 
                 'category' => $category,
+                'session' => $session
+        ]);
+    }
+
+    #[Route('/customer/shop', name: 'shop')]
+    public function shopindex(CategoryRepository $categoryRepository, ProductRepository $productRepository, CookieService $cookieService, Request $request): Response
+    {
+        $session = $cookieService->checkAndSetCookieNoRepeat($request);
+        $products = $productRepository->findBy([],[
+            'id' => 'DESC'
+            ],
+        6);
+
+        return $this->render('customer/shop/shop.html.twig', [ 
+                'categories' => $categoryRepository->findAll(),
+                'products' => $products,
                 'session' => $session
         ]);
     }

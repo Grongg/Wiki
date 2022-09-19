@@ -4,39 +4,34 @@
 
 {% block body %}
     {% include "/customer/shared/_messages_flash.html.twig" %}
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-12">
+    <div class="py-5">
+        <div class="row d-flex align-items-center justify-content-center mx-0">
+            <div class="col-12 flex-column justify-content-center">
                 <h3 class="text-center">
                     {{ category.name | upper }}
                 </h3>
-                <div class="">
-                    <img src="{{ category.image }}" alt="" class="w-100 imageCateg">
+                <div class="d-flex align-items-center justify-content-center">
+                    <img src="{{ category.image }}" alt="{{category.name}} first product" class="imageCateg">
                 </div>
             </div>
-            <div class="col-12 mb-3">
-                <a href="{{ app.request.headers.get('referer') }}" class="btn btn-secondary">Revenir</a>
-            </div>
             {% if category.products | length > 0 %}
-                {% for product in category.products %}
-                    <div class="col-4 mt-2">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>{{ product.name | upper }}</h5>
-                            </div>
-                            <div class="card-body">
-                                <img src="{{ product.image }}" alt="" class="w-100 imageCard">
-                            </div>
-                            <div class="card-footer">
-                                <p>Prix : {{ product.price | priceFormatEuro }}</p>
-                                <p>Catégorie : {{ product.category.name }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <a href="{{ path('customer_product',{ 'id' : product.id })  }}" class="btn btn-info w-100">Consulter</a>
-                            </div>
+                <div class="col-xl-10 col-xxl-10 col-lg-10 col-md-12">
+                    <div class="pt-2">
+                        <div class="row d-flex align-items-center justify-content-center" id="category">
+                            {% for product in category.products %}
+                                <div class="col-auto card border-secondary m-3 d-flex align-items-center">
+                                    <div class="card-cate card-body">
+                                        <img src="{{ product.image }}" class="card-pdt " alt="{{product.name}}" id="">
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center align-items-center mb-2">
+                                        <a href="{{ path("customer_product", {'id': product.id}) }}" alt="{{product.name}}" class="btn btn-secondary">Voir le produit</a>
+                                    </div>
+                                    <p class="card-footer shadow border-secondary text-center card-pdt-name">{{product.name}}</p>
+							    </div>
+                            {% endfor %}
                         </div>
                     </div>
-                {% endfor %}
+                </div>
             {% else %}
                 <p>Il n'y a pas encore de produit ayant cette catégorie</p>
             {% endif %}

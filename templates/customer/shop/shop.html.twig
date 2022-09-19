@@ -1,0 +1,35 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Wiki - Accueil{% endblock %}
+
+{% block body %}
+	{% include "/customer/shared/_messages_flash.html.twig" %}
+        <div class="pt-5 pb-5 d-flex justify-content-center" id="shop">
+			<h2 id="shop-text">Le Shop</h2>
+		</div>
+		{% for category in categories %}
+			<div id="section">
+				<h5 class="pt-5 pb-3 ps-5" id="section-text">{{category.name}}</h5>
+				<div class="container ps-5 pt-2">
+					<div class="row" id="category">
+						{% for product in category.products | slice(0, 6)  %}
+							<div class="col-auto pb-5" id="card">
+								<div class="card object-fit-content" style="height: 10.7em; max-width: 13em; border: none; width: auto;">
+									<a href="{{ path("customer_product", {'id': product.id}) }}">
+										<img src="{{ product.image }}" class="card-img-top" alt="{{product.name}}" id="pdt-img">
+									</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-12 col-sg-12 col-xl-12 col-xs-12 ps-5 pb-4 view-more">
+					<a class="ms-1 btn btn-secondary" href="{{ path("customer_category", { 'id' : category.id }) }}">View More ...</a>
+				</div>
+			</div>
+		{% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/homeSections.js') }}"></script>
+{% endblock %}

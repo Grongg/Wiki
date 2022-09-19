@@ -5,59 +5,64 @@
 {% block body %}
 
     {% include "/customer/shared/_messages_flash.html.twig" %}
+
     <div class="container py-5">
         <div class="row">
             <div class="col-12">
                 <h3 class="text-center">Recapitulatif de la commande</h3>
             </div>  
-            <div class="col-sm-12 col-md-6 mt-3">
+            <div class="col-sm-12 col-lg-6 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Produit</th>
-                                    <th scope="col">P.U</th>
-                                    <th scope="col">Qté</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                            <div class="table table-hover">
+                                <div class="d-flex justify-content-between ps-lg-1 ps-xl-4 pe-2 pe-xl-1 ms-2">
+                                    <div>
+                                        <p class="ms-md-4 ms-lg-0 ms-xl-2 mb-0 recapHeadPara">Produit</p>
+                                    </div>
+                                    <div class="col-6 col-xl-5 d-flex justify-content-around justify-content-xl-evenly ps-2 px-xl-2 ps-lg-3 ps-md-4">
+                                        <p class="mb-0 recapHeadPara">P.U</p>
+                                        <p class="mb-0 recapHeadPara">Qté</p>
+                                        <p class="mb-0 recapHeadPara">Total</p>
+                                    </div>
+                                </div>
+                                <div class="my-2 opacity-25" style="border-top: 1px solid black"></div>
+                                <div>
+                                        {% for item in cart %}
 
-                                {% for item in cart %}
-
-                                    <tr class="d-flex align-items-between">
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart" style="width: 70%;">
-                                                <div class="d-flex flex-column align-items-center justify-content-center">
-                                                    <p>{{ item.product.name }}</p>
+                                            <div class="d-flex justify-content-around flex-column">
+                                                <div class="d-flex">
+                                                    <div class="d-flex align-items-center col-6 col-xl-7">
+                                                        <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart">
+                                                        <div class="d-flex align-items-center justify-content-center">
+                                                            <p class="mb-0 ps-2 ps-md-3 recapProductName">{{ item.product.name }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-xl-5 d-flex align-items-center justify-content-around justify-content-lg-center ms-md-2 ms-lg-1">
+                                                        <p class="mb-0 recapProductPrice">{{ item.product.price | priceFormatEuro }}</p>
+                                                            <button class="btn btn-light mx-lg-4">{{ item.qty }}</button>
+                                                        <p class="mb-0 recapProductPrice">{{ item.total | priceFormatEuro }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>{{ item.product.price | priceFormatEuro }}</td>
-                                        <td>
-                                            <button class="btn btn-light">{{ item.qty }}</button>
-                                        </td>
-                                        <td>{{ item.total | priceFormatEuro }}</td>
-                                    </tr>
-                                {% endfor %}
-                                <tr>
+                                        {% endfor %}
+
+                                <hr>
+                                <div class="d-flex justify-content-end ms-1 pe-1 pe-md-4 pe-lg-1 pe-xl-4">
                                     <th colspan="2"></th>
-                                    <th><strong>Sous Total</strong></th>
-                                    <th><strong>{{ totalCart | priceFormatEuro }}</strong></th>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    <th><strong class="totalPrice">Sous Total</strong></th>
+                                    <th><strong class="totalPrice">{{ totalCart | priceFormatEuro }}</strong></th>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="{{ path('cart_detail') }}" class="btn btn-secondary">Modifier le panier</a>
+                    <div class="card-footer d-flex justify-content-center align-items-center w-100">
+                        <a href="{{ path('cart_detail') }}" class="btn btn-secondary w-100">Modifier le panier</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 mt-3">
+            <div class="col-sm-12 col-lg-6 mt-3">
                 <div class="card">
                     <div class="card-header">
                         <h3>Adresse de livraison</h3>

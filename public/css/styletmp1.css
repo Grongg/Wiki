@@ -93,49 +93,6 @@
     transform: scale(1.2);   
 }
 
-.card-cate
-{
-    width: 20rem;
-    height: 20rem;
-}
-
-.card-pdt
-{
-    width: 100%;
-    height: 100%;
-}
-
-.card-pdt-name
-{
-    font-size: 1.17rem!important;
-    font-weight: 600!important;
-    background: none;
-    border-radius: 40% !important;
-}
-
-.card-pdt
-{
-    transition: transform .5s ease;
-    border-radius: 3%;
-    border: solid #6C757D 2px;
-}
-
-.card-pdt:hover
-{
-    transform: scale(1.2);   
-}
-
-.imageCateg
-{
-    width: 35%;
-}
-
-.productProfile
-{
-    display: flex;
-    flex-direction: column;
-}
-
 #spellImage
 {
     border-radius: 50%;
@@ -222,11 +179,6 @@
     font-size: 16px;
 }
 
-.imageProductCart
-{
-    width: 40%;
-}
-
 #CGU > div
 {
     margin-bottom: 0px !important;
@@ -269,6 +221,11 @@ footer{
     object-fit: cover !important;
 }
 
+.imageProductCart
+{
+    width: 40%;
+}
+
 /* Mobile S */
 @media screen and (max-width: 321px) 
 {
@@ -280,12 +237,6 @@ footer{
     footer
     {
         height: 40rem;
-    }
-
-    .log
-    {
-        flex: 0 0 auto !important;
-        width: 91.66666667% !important;
     }
 
     .minus
@@ -440,28 +391,6 @@ footer{
         justify-content: center;
     }
 
-    .card-cate
-    {
-        width: 17rem
-    }
-
-
-    .imageCateg
-    {
-        display:none !important;
-    }
-
-    .card-pdt
-    {
-        transition: unset;
-        border-radius: 3%;
-    }
-
-    .card-pdt:hover
-    {
-        transform: unset;   
-    }
-
     .recapProductName
     {
         font-size: 10.5px;
@@ -481,16 +410,6 @@ footer{
     {
         font-size: 14px;
     }
-
-    .pdth3
-    {
-        font-size: 0.99rem;
-    }
-
-    .imageProductDetail
-    {
-        width: 100%;
-    }
 }
 
 /* Mobile M */
@@ -504,12 +423,6 @@ footer{
     footer
     {
         height: 31rem;
-    }
-
-    .log
-    {
-        flex: 0 0 auto !important;
-        width: 91.66666667% !important;
     }
 
     .minus
@@ -636,22 +549,6 @@ footer{
         justify-content: center;
     }
 
-    .card-pdt
-    {
-        transition: unset;
-        border-radius: 3%;
-    }
-
-    .card-pdt:hover
-    {
-        transform: unset;   
-    }
-
-    .imageCateg
-    {
-        display:none !important;
-    }
-
     .recapProductName
     {
         font-size: 12px;
@@ -671,16 +568,6 @@ footer{
     {
         font-size: 14px;
     }
-
-    .pdth3
-    {
-        font-size: 0.99rem;
-    }
-
-    .imageProductDetail
-    {
-        width: 100%;
-    }
 }
 
 /* Mobile L */
@@ -694,43 +581,6 @@ footer{
     footer
     {
         height: 31rem;
-    }
-
-    .log
-    {
-        flex: 0 0 auto !important;
-        width: 91.66666667% !important;
-    }
-
-    .card-pdt
-    {
-        transition: unset;
-        border-radius: 3%;
-    }
-
-    .card-pdt:hover
-    {
-        transform: unset;   
-    }
-
-    .imageCateg
-    {
-        display:none !important;
-    }
-    
-    .recapProductName
-    {
-        font-size: 14px;
-    }
-
-    .pdth3
-    {
-        font-size: 0.99rem;
-    }
-
-    .imageProductDetail
-    {
-        width: 100%;
     }
 
     .page-link
@@ -848,6 +698,10 @@ footer{
         justify-content: center;
     }
 
+    .recapProductName
+    {
+        font-size: 14px;
+    }
 }
 
 /* Tablette */
@@ -872,22 +726,6 @@ footer{
     .navbar-brand
     {
         width: 15px;
-    }
-
-    .imageCateg
-    {
-        display: block !important;
-        width: 75%;
-    }
-
-    .pdth3
-    {
-        font-size: 0.99rem;
-    }
-
-    .imageProductDetail
-    {
-        width: 160%;
     }
 
     .nav-link
@@ -959,19 +797,6 @@ footer{
     {
         top: 430px;
         margin-right: 0 !important;
-        display: none !important;
-    }
-    
-    .navbar-toggler-icon 
-    {
-        display: block !important;
-    }
- 
-
-
-    .navbar-toggler 
-    {
-        display: block !important;
     }
 
     .carousel-indicators
@@ -986,24 +811,9 @@ footer{
     }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1024px)
-{
-    .navbar-toggler-icon 
-    {
-        display: none !important;
-    }
- 
-    .navbar-toggler 
-    {
-        display: none !important;
-    }
-}
-
-
 /* Laptop */
 @media only screen and (min-width: 769px) and (max-width: 1024px)
 { 
-    
     .content
     {
         padding-bottom: 19rem;
@@ -1012,6 +822,16 @@ footer{
     footer
     {
         height: 19rem;
+    }
+    
+    .navbar-toggler
+    {
+        display: none !important;
+    }
+
+    .navbar-toggler-icon
+    {
+        display: none !important;
     }
     
     .imagechampionDetail
@@ -1034,17 +854,6 @@ footer{
     {
         width: 40vw;
         height: 45vh;
-    }
-
-    .imageCateg
-    {
-        display: block !important;
-        width: 45%;
-    }
-
-    .imageProductDetail
-    {
-        width: 100%;
     }
 
     .spell-box > p
@@ -1090,10 +899,19 @@ footer{
 /* Large Screen */
 @media only screen and (min-width: 1025px) and (max-width: 1200px)
 {
-    .imageCateg
+    /* .spell-box
     {
-        display: block !important;
-    }
+        height: 45vh;
+        .spell-box > h5
+        {
+            font-size: 45px;
+        }
+        
+        .spell-box > p 
+        {
+            font-size: x-large;
+        }
+    } */
 
     .spell-box
     {
@@ -1185,28 +1003,18 @@ footer{
     {
         width: 15%;
     }
-
-    .imageCateg
-    {
-        display: block !important;
-    }
 }
 
 @media only screen and (min-width: 1501px)  and (max-width: 2900px)
 {
     .content
     {
-        padding-bottom: 20rem;
+        padding-bottom: 22rem;
     }
 
     footer
     {
-        height: 26rem;
-    }
-
-    footer > div
-    {
-        font-size: x-large;
+        height: 17rem;
     }
 
     .spell-box
@@ -1269,45 +1077,6 @@ footer{
     {
         height: 14em !important;
     }
-
-    .card-cate
-    {
-        width: 30rem;
-        height: 30rem;
-    }
-
-    .card-pdt
-    {
-        width: 100%;
-        height: 100%;
-        border: solid #6C757D 2px;
-    }
-
-    .imageCateg
-    {
-        display: block !important;
-    }
-
-    .imageProductDetail
-    {
-        height: 120%;
-    }
-
-    .pdth3
-    {
-        font-size: 3.0rem;
-    }
-
-    .productProfile
-    {
-        height: 70vh;
-    }
-
-    .nav-link
-    {
-        font-size: xx-large;
-    }
-    
 }
 
 
