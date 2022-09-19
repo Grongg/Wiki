@@ -1201,12 +1201,12 @@ footer{
 
     footer
     {
-        height: 26rem;
+        height: 20rem;
     }
 
     footer > div
     {
-        font-size: x-large;
+        font-size: large;
     }
 
     .spell-box
@@ -1290,22 +1290,22 @@ footer{
 
     .imageProductDetail
     {
-        height: 120%;
+        width: 40%;
     }
 
     .pdth3
     {
-        font-size: 3.0rem;
+        font-size: 1.0rem;
     }
 
     .productProfile
     {
-        height: 70vh;
+        /* height: 70vh; */
     }
 
     .nav-link
     {
-        font-size: xx-large;
+        font-size: large;
     }
     
 }
