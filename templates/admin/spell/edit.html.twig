@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit Spell</h1>
 
-    {{ include('spell/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/spell/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('spell_index') }}">back to list</a>
+    <a href="{{ path('admin_spell_index') }}">back to list</a>
 
-    {{ include('spell/_delete_form.html.twig') }}
+    {{ include('admin/spell/_delete_form.html.twig') }}
 {% endblock %}
