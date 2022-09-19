@@ -31,6 +31,7 @@ class Spell
     private $type; //y 
     
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le champs type est requis.')]
     private $spellId; //y
     
     #[ORM\Column(type: 'boolean')]
@@ -43,11 +44,9 @@ class Spell
     private $isChampPassive; //y 
     
     #[ORM\Column(type: 'boolean')]
-    #[Assert\NotBlank(message: 'Le champs actif est requis.')]
     private $isActive; //y
     
     #[ORM\Column(type: 'boolean')]
-    #[Assert\NotBlank(message: 'Le champs passif est requis.')]
     private $isPassive; //y
 
     #[ORM\Column(type: 'array')]
