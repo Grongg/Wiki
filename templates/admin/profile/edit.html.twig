@@ -1,0 +1,19 @@
+{% extends 'customer/base.html.twig' %}
+
+{% block title %}Wiki - Modifier le profile{% endblock %}
+
+{%  block body %}
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                {{ form_start(EditProfileForm)  }}
+                {{ form_widget(EditProfileForm) }}
+                <a href="{{ path("customer_account_edit_password") }}" class="btn btn-primary w-100 mt-3">Modifier le mot de passe</a>
+                <button type="submit" class="btn btn-success w-100 mt-3" id="buttonSubmit">Valider les modifications</button>
+                {{ form_end(EditProfileForm) }}
+            </div>
+        </div>
+    </div>
+
+{%  endblock %}

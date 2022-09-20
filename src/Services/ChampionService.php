@@ -4,8 +4,8 @@ namespace App\Services;
 
 use Goutte\Client;
 use App\Entity\Champion;
-use App\Services\SpellService;
 use App\Repository\ChampionRepository;
+use App\Services\SpellService;
 use App\Repository\SpellRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use RiotAPI\DataDragonAPI\DataDragonAPI;

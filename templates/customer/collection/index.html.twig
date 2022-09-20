@@ -13,7 +13,7 @@
             <div class="row">
                 {% for champ in champions %}
                     {% if champ["isSelected"] is same as true %}
-                        <div class="col-sm-6 col-md-3 mt-2">
+                        <div class="col-sm-6 col-md-3 mt-2 d-flex justify-content-center align-items-center">
                            <img src="{{ champ["champion"].icon }}" alt="{{ champ["champion"].name }} icon" class="collection imageChampion" data-champ="{{ champ["champion"].id }}" style="border-color: gold; filter: brightness(100%); -webkit-box-shadow: 0px 0px 5px 1px gold; box-shadow: 0px 0px 5px 1px gold;">
                         </div>
                     {% else %}
